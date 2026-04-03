@@ -25,17 +25,40 @@
             line-height: 1.6;
         }
 
+        /* منوی ناوبری چسبان */
         nav {
-            background-color: var(--nav-bg);
-            padding: 15px 0;
-            text-align: center;
+            background-color: #2d3748;
+            padding: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         nav a {
-            color: white;
+            color: #a0aec0;
             text-decoration: none;
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 15px 20px;
+            transition: all 0.3s;
+        }
+
+        nav a.active {
+            color: #ffffff;
+            border-bottom: 3px solid #e06c75;
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        nav a:hover:not(.active) {
+            color: #ffffff;
         }
 
         .container {
@@ -57,7 +80,7 @@
 
         .welcome-title { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 10px; }
         
-        input[type="text"], textarea {
+        input[type="text"] {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -112,11 +135,11 @@
 </head>
 <body>
 
-    <nav style="background-color: #2d3748; padding: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-        <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-            <a href="index.html" style="color: #a0aec0; text-decoration: none; font-weight: 600; padding: 15px 20px; transition: all 0.3s;">🏠 Hem</a>
-            <a href="Begreppslista-v15.html" style="color: #a0aec0; text-decoration: none; font-weight: 600; padding: 15px 20px; transition: all 0.3s;">📖 Begrepp v.15</a>
-            <a href="helhetsperspektiv.html" style="color: #ffffff; text-decoration: none; font-weight: 600; padding: 15px 20px; border-bottom: 3px solid #e06c75; background-color: rgba(255,255,255,0.05);">🎯 Helhetsperspektiv</a>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">🏠 Hem</a>
+            <a href="Begreppslista-v15.html">📖 Begrepp v.15</a>
+            <a href="helhetsperspektiv.html" class="active">🎯 Helhetsperspektiv</a>
         </div>
     </nav>
 
@@ -162,96 +185,94 @@
     </div>
 
     <script>
-        // ۱۰ سوال تخصصی و ۴ گزینه‌ای برای این درس
         const quizData = [
             {
-                fraga: "Vad innebär ett 'helhetsperspektiv' inom vård och omsorg?",
+                fraga: "Vad innebär 'Likvärdighet' enligt presentationen?",
                 svar: [
-                    { text: "Att se hela människan och ta hänsyn till både fysiska, psykiska, sociala och existentiella behov.", correct: true },
-                    { text: "Att enbart fokusera på den fysiska sjukdomen eller skadan.", correct: false },
-                    { text: "Att personalen fattar alla beslut utan att blanda in brukaren.", correct: false },
-                    { text: "Att alla brukare på ett boende behandlas på exakt samma sätt.", correct: false }
+                    { text: "Att något ska vara lika bra för alla, till exempel lika tillgång till vård av hög kvalitet.", correct: true },
+                    { text: "Att man ska ge exakt samma stöd till alla människor oavsett behov.", correct: false },
+                    { text: "Att alla människor har exakt samma förmågor och förutsättningar.", correct: false },
+                    { text: "Att alla i samhället måste tycka och tänka på samma sätt.", correct: false ]
+            },
+            {
+                fraga: "Som undersköterska ska man ha ett 'kompensatoriskt förhållningssätt'. Vad innebär det?",
+                svar: [
+                    { text: "Att se till så att alla man möter får möjligheter till lika goda upplevelser och en positiv utveckling.", correct: true },
+                    { text: "Att man ger ekonomisk kompensation till den som blivit felbehandlad.", correct: false },
+                    { text: "Att man kräver att personen ska klara allt själv för att träna upp sig.", correct: false },
+                    { text: "Att man utför sysslor åt personen även om hen kan klara det själv.", correct: false }
                 ]
             },
             {
-                fraga: "Vad betyder begreppet 'Autonomi'?",
+                fraga: "Vilket av följande är ett exempel på en 'fördom' enligt presentationen?",
                 svar: [
-                    { text: "Rätten till självbestämmande och att få fatta egna beslut om sitt liv.", correct: true },
-                    { text: "Att personalen har rätt att bestämma över brukarens vardag.", correct: false },
-                    { text: "Att alla insatser ska utföras i grupp tillsammans med andra.", correct: false },
-                    { text: "Att man måste klara allting helt själv utan hjälp från samhället.", correct: false }
+                    { text: "Att någon med en intellektuell funktionsnedsättning inte kan framföرا sina åsikter eller fatta egna beslut om saker som rör individen själv.", correct: true },
+                    { text: "Att alla människor är olika och har unika förmågor.", correct: false },
+                    { text: "Att samhället ska vara jämställt och alla människor är fria.", correct: false },
+                    { text: "Att man ska möta alla människor med respekt.", correct: false }
                 ]
             },
             {
-                fraga: "Vilket år stängdes många stora institutioner tack vare avvecklingen av de gamla vårdformerna?",
+                fraga: "Vad är sant om 'Normaliseringsprincipen' som växte fram under 1950-talet?",
                 svar: [
-                    { text: "Under slutet av 1900-talet (främst 1990-talet genom LSS och handikappreformen).", correct: true },
-                    { text: "I början av 1920-talet.", correct: false },
-                    { text: "Direkt efter andra världskriget 1945.", correct: false },
-                    { text: "Det har ännu inte hänt i Sverige.", correct: false }
+                    { text: "Att personer med funktionsnedsättningar ska ha möjlighet att leva ett liv som liknar andras så mycket som möjligt.", correct: true },
+                    { text: "Att alla sjuka personer ska tvingas bete sig helt normalt.", correct: false },
+                    { text: "Att man stängde alla skolor och tvingade barnen att arbeta.", correct: false },
+                    { text: "Att funktionsnedsättningar skulle döljas för allmänheten.", correct: false }
                 ]
             },
             {
-                fraga: "Vilken lag trädde i kraft 1994 för att garantera goda levnadsvillkor för vissa personer med funktionsnedsättning?",
+                fraga: "Fram till vilket år fanns lagen om tvångssterilisering kvar i Sverige?",
                 svar: [
-                    { text: "LSS (Lagen om stöd och service till vissa funktionshindrade).", correct: true },
-                    { text: "SoL (Socialtjänstlagen).", correct: false },
-                    { text: "HSL (Hälso- och sjukvårdslagen).", correct: false },
-                    { text: "Arbetsmiljölagen.", correct: false }
+                    { text: "1974", correct: true },
+                    { text: "1950", correct: false },
+                    { text: "1994", correct: false },
+                    { text: "1960", correct: false }
                 ]
             },
             {
-                fraga: "Vad innebär ett 'kompensatoriskt förhållningssätt' hos personalen?",
+                fraga: "Vad innebar omsorgslagen som kom år 1960?",
                 svar: [
-                    { text: "Att ge det stöd som behövs för att kompensera för en funktionsnedsättning så att personen kan leva som andra.", correct: true },
-                    { text: "Att kräva att personen ska klara allt själv för att träna upp sig.", correct: false },
-                    { text: "Att ge ekonomisk ersättning till den som är sjuk.", correct: false },
-                    { text: "Att personalen tar över alla sysslor även det personen faktiskt kan göra själv.", correct: false }
+                    { text: "Flera stora institutioner stängdes och personerna skulle flyttas ut i samhället och leva som andra.", correct: true },
+                    { text: "Att alla personer med funktionsnedsättning skulle flyttas till stora sjukhus.", correct: false },
+                    { text: "Att det blev förbjudet för familjer att ta hand om sina egna barn.", correct: false },
+                    { text: "Att undersköterskor inte längre behövde tystnadsplikt.", correct: false }
                 ]
             },
             {
-                fraga: "Vad innebär begreppet 'Inkludering'?",
+                fraga: "Vilken lag kom år 1994 för att garantera stöd och service för vissa funktionshindrade?",
                 svar: [
-                    { text: "Att alla människor ska känna sig välkomna och vara en del av gemenskapen i samhället.", correct: true },
-                    { text: "Att personer med funktionsnedsättningar ska leva samlade på särskilda områden.", correct: false },
-                    { text: "Att man bara bjuder in personer som har samma diagnos till aktiviteter.", correct: false },
-                    { text: "Att alla i samhället måste tycka och tänka likadant.", correct: false }
+                    { text: "LSS", correct: true },
+                    { text: "SoL", correct: false },
+                    { text: "HSL", correct: false },
+                    { text: "Diskrimineringslagen", correct: false }
                 ]
             },
             {
-                fraga: "Vad är målet med 'Habilitering' och 'Rehabilitering'?",
+                fraga: "Vad innebär det att arbeta utifrån ett 'Helhetsperspektiv' enligt presentationen?",
                 svar: [
-                    { text: "Att bibehålla eller återfå bästa möjliga funktionsförmåga och självständighet.", correct: true },
-                    { text: "Att bota alla kroniska sjukdomar med medicin.", correct: false },
-                    { text: "Att utreda vem som bär skulden för att en skada har uppstått.", correct: false },
-                    { text: "Att bedöma om personen har rätt till ekonomiskt bistånd.", correct: false }
+                    { text: "Att se hela människan och förstå att en person är så mycket mer än bara sin funktionsnedsättning.", correct: true },
+                    { text: "Att personalen ska göra precis allting åt personen på boendet.", correct: false },
+                    { text: "Att bara fokusera på de fysiska begränsningarna som personen har.", correct: false },
+                    { text: "Att man utgår från att alla personer med samma diagnos fungerar likadant.", correct: false }
                 ]
             },
             {
-                fraga: "Vad menas med 'Delaktighet' i vårdsammanhang?",
+                fraga: "Vad är skillnaden mellan funktionsnedsättning och funktionshinder enligt presentationen?",
                 svar: [
-                    { text: "Att brukaren är aktivt involverad i planeringen och genomförandet av sina egna insatser.", correct: true },
-                    { text: "Att brukaren tvingas delta i alla gruppaktiviteter på boendet.", correct: false },
-                    { text: "Att man delar upp arbetsuppgifterna rättvist mellan personalen.", correct: false },
-                    { text: "Att de anhöriga får ta över alla beslutanderätter från brukaren.", correct: false }
+                    { text: "Funktionsnedsättning är den nedsatta förmågan, medan funktionshinder uppstår i mötet med en bristfällig miljö.", correct: true },
+                    { text: "Det är exakt samma sak och orden används på samma sätt.", correct: false },
+                    { text: "Funktionshinder är medfött, medan funktionsnedsättning får man senare i livet.", correct: false },
+                    { text: "Funktionsnedsättning handlar bara om fysiska skador.", correct: false }
                 ]
             },
             {
-                fraga: "Vilken princip innebär att alla människor har samma grundläggande värde, oavsett förmågor eller bakgrund?",
+                fraga: "Enligt 'Delaktighetsmodellen', vad innebär dimensionen 'Lust'?",
                 svar: [
-                    { text: "Principen om alla människors lika värde (Människovärdesprincipen).", correct: true },
-                    { text: "Normaliseringsprincipen.", correct: false },
-                    { text: "Integritetsprincipen.", correct: false },
-                    { text: "Självbestämmandeprincipen.", correct: false }
-                ]
-            },
-            {
-                fraga: "Vad är syftet med 'Normaliseringsprincipen'?",
-                svar: [
-                    { text: "Att personer med funktionsnedsättning ska ha möjlighet att leva ett liv som liknar andras så mycket som möjligt.", correct: true },
-                    { text: "Att tvinga alla att bete sig exakt likadant.", correct: false },
-                    { text: "Att alla sjukdomar ska behandlas med standardiserade metoder.", correct: false },
-                    { text: "Att dölja funktionsnedsättningar så att de inte syns i samhället.", correct: false }
+                    { text: "Att man ska känna lust, ha intresse och en vilja att vara med.", correct: true },
+                    { text: "Att man känner att man kan påverka sitt liv.", correct: false },
+                    { text: "Att man ska vara accepterad av alla och bli lyssnad på.", correct: false },
+                    { text: "Att man ska ha tillgång till den fysiska miljön.", correct: false }
                 ]
             }
         ];

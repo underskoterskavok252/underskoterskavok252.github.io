@@ -3,278 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Begreppslista & Quiz - Vecka 15</title>
+    <title>Undersköterska Utbildning - Startsida</title>
     <style>
         :root {
-            --primary: #27ae60;
-            --bg: #f5fbf7;
-            --text: #2c3e50;
-            --white: #ffffff;
-            --accent: #e67e22;
+            --primary: #2c3e50;
+            --bg: #f5f6fa;
+            --text: #333;
+            --accent1: #27ae60;
+            --accent2: #2980b9;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; text-align: center; }
-        nav { background: #2c3e50; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        nav a { color: white; text-decoration: none; font-weight: bold; margin: 0 15px; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); margin-bottom: 10px; }
+        p.subtitle { color: #7f8c8d; margin-bottom: 30px; }
         
-        .container { max-width: 750px; margin: 0 auto; text-align: left; }
-        h1 { color: var(--primary); text-align: center; }
-        h2 { color: var(--text); border-bottom: 2px solid #e0ebd0; padding-bottom: 10px; margin-top: 40px; }
-        
-        /* کادر نمایش متن در حال پخش */
-        .audio-player {
-            background: #e8f4ec;
-            border: 1px solid #27ae60;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: none; /* در حالت عادی مخفی است */
-        }
-        .audio-player.active { display: block; }
-        .audio-title { font-weight: bold; color: var(--primary); margin-bottom: 5px; font-size: 0.9rem; }
-        .audio-text { font-size: 1.1rem; color: var(--text); line-height: 1.5; }
-
-        /* استایل کارت‌های لیست کلمات */
-        .card {
-            background: var(--white);
-            margin-bottom: 12px;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-            border: 1px solid #e0ebd0;
-            overflow: hidden;
-        }
-        .card-header {
+        .menu-link {
+            display: block;
+            text-decoration: none;
             padding: 15px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            transition: 0.2s;
-        }
-        .card-header:hover { background: #fafdfb; }
-        .sv-title { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
-        .card-content {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height: 0.3s ease, padding 0.3s ease;
-            background: #fcfdfe;
-        }
-        .card.open .card-content {
-            max-height: 300px;
-            padding: 15px 20px;
-            border-top: 1px solid #e0ebd0;
-        }
-        .arrow { font-size: 1rem; color: #aaa; transition: transform 0.3s; }
-        .card.open .arrow { transform: rotate(180deg); }
-        p { line-height: 1.6; margin: 0; }
-
-        /* استایل بخش کوییز */
-        #quiz-section {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border: 1px solid #e0ebd0;
-            margin-top: 20px;
-        }
-        .question { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: var(--text); }
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .option-btn {
-            background: #f9fbf9;
-            border: 1px solid #d0e1d4;
-            padding: 12px;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.2s;
-            text-align: left;
-        }
-        .option-btn:hover { background: #e8f4ec; border-color: var(--primary); }
-        .option-btn.correct { background: #2ecc71; color: white; border-color: #27ae60; }
-        .option-btn.wrong { background: #e74c3c; color: white; border-color: #c0392b; }
-        #feedback { margin-top: 15px; font-weight: bold; font-size: 1.1rem; min-height: 1.5em; }
-        .next-btn {
-            margin-top: 15px;
-            background: var(--primary);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
             font-weight: bold;
-            display: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            transition: 0.3s ease;
+            text-align: center;
         }
-        .next-btn:hover { background: #219150; }
+        .link-green { background: var(--accent1); }
+        .link-green:hover { background: #219150; transform: translateY(-2px); }
+        
+        .link-blue { background: var(--accent2); }
+        .link-blue:hover { background: #217dbb; transform: translateY(-2px); }
+        
+        .footer { margin-top: 40px; font-size: 0.85rem; color: #95a5a6; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Hem</a>
-        <a href="index.html">Begreppslista</a>
-    </nav>
-
     <div class="container">
-        
-        <h1>Begreppslista (Vecka 15)</h1>
-        <p style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
-            Klicka på korten för att se förklaringen och höra uttalet.
-        </p>
+        <h1>Vård och Omsorg</h1>
+        <p class="subtitle">Välj ett ämne för att träna på begrepp och göra quiz.</p>
 
-        <div id="player" class="audio-player">
-            <div class="audio-title">🔊 Nu spelas:</div>
-            <div id="playing-text" class="audio-text"></div>
+        <a href="quiz-v15.html" class="menu-link link-green">📖 Begreppslista Vecka 15</a>
+
+        <a href="aldre-multisjuka.html" class="menu-link link-blue">👵 Äldre multisjuka</a>
+
+        <div class="footer">
+            Skapad för att hjälpa klasskamrater att plugga.
         </div>
-
-        <div id="words-list"></div>
-
-        <h2>Testa dina kunskaper (Quiz)</h2>
-        <div id="quiz-section">
-            <div id="question-text" class="question">Laddar fråga...</div>
-            <div id="options" class="options-grid"></div>
-            <div id="feedback"></div>
-            <button id="next-btn" class="next-btn" onclick="generateQuestion()">Nästa fråga</button>
-        </div>
-
     </div>
 
-    <script>
-        const begreppData = [
-            { ord: "Demokratisk värdegrund", beskrivning: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
-            { ord: "* Lika värde", beskrivning: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
-            { ord: "* Likvärdighet", beskrivning: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård." },
-            { ord: "* Inkludering", beskrivning: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning, ålder eller bakgrund." },
-            { ord: "* Tillgänglighet", beskrivning: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika och har olika behov." },
-            { ord: "Levnadsvillkor", beskrivning: "Handlar om hur en person lever och vilka möjligheter personen har till ett bra och tryggt liv." },
-            { ord: "* Delaktighet", beskrivning: "Betyder att få vara med, påverka och känna att man är viktig i sitt eget liv." },
-            { ord: "Delaktighetsmodellen", beskrivning: "Ett arbetssätt för att stärka inflytande och självbestämmande. Modellen bygger på sex delar." },
-            { ord: "Livskvalitet", beskrivning: "Handlar om brukarens hälsa och välmående. Att känna sig välkommen och behövd." },
-            { ord: "Normer", beskrivning: "Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara." },
-            { ord: "Värderingar", beskrivning: "Att man får tycka och tänka som man vill och det styr vad vi gör och vad vi säger." },
-            { ord: "* Funktionsförmåga", beskrivning: "Beskriver hur en person fungerar fysiskt, psykiskt, kognitivt och socialt." },
-            { ord: "Fysisk funktionsförmåga", beskrivning: "Nedsatt rörelseförmåga, nedsatt syn, nedsatt hörsel. Man kan födas med det." },
-            { ord: "Psykisk funktionsförmåga", beskrivning: "Kan påverkas av trauma, sexuellt övergrepp, krig eller livssituation." },
-            { ord: "Kognitiv funktionsförmåga", beskrivning: "Svårt med inlärning, minne, svårt att ta in information eller förmedla information." },
-            { ord: "Social funktionsförmåga", beskrivning: "Svårigheter med att skapa och bibehålla relationer." },
-            { ord: "* Funktionsnedsättning", beskrivning: "Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls." },
-            { ord: "* Funktionshinder", beskrivning: "Uppstår när omgivningen gör det svårt för en person med funktionsnedsättning." },
-            { ord: "* Självbestämmande", beskrivning: "Betyder att en person får vara med och bestämma över sitt eget liv." }
-        ];
-
-        const listContainer = document.getElementById('words-list');
-        begreppData.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="card-header" onclick="toggleCard(this, '${item.ord.replace('*', '')}. ${item.beskrivning}')">
-                    <span class="sv-title">${item.ord}</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="card-content"><p>${item.beskrivning}</p></div>
-            `;
-            listContainer.appendChild(card);
-        });
-
-        // تابع مدیریت پخش صدا و نمایش متن
-        function speakText(text) {
-            window.speechSynthesis.cancel(); // قطع صدای قبلی
-            
-            const playerDiv = document.getElementById('player');
-            const playingText = document.getElementById('playing-text');
-            
-            playingText.innerText = text;
-            playerDiv.classList.add('active'); // ظاهر کردن نوار پخش
-
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'sv-SE';
-            msg.rate = 0.85;
-
-            // وقتی خواندن تمام شد، کادر مخفی شود
-            msg.onend = function() {
-                playerDiv.classList.remove('active');
-            };
-
-            window.speechSynthesis.speak(msg);
-        }
-
-        function toggleCard(header, text) {
-            header.parentElement.classList.toggle('open');
-            if (header.parentElement.classList.contains('open')) {
-                speakText(text);
-            }
-        }
-
-        let currentCorrectAnswer = "";
-
-        function generateQuestion() {
-            const feedbackDiv = document.getElementById('feedback');
-            const nextBtn = document.getElementById('next-btn');
-            feedbackDiv.innerText = "";
-            feedbackDiv.style.color = "inherit";
-            nextBtn.style.display = "none";
-
-            const randomIdx = Math.floor(Math.random() * begreppData.length);
-            const questionData = begreppData[randomIdx];
-            
-            const questionString = `Vilket ord passar till denna förklaring?\n"${questionData.beskrivning}"`;
-            document.getElementById('question-text').innerText = questionString;
-            currentCorrectAnswer = questionData.ord;
-
-            // همچنین صورت سوال کوییز را هم بخواند
-            speakText(`Fråga: ${questionData.beskrivning}`);
-
-            let options = [questionData.ord];
-            while (options.length < 4) {
-                const randomOption = begreppData[Math.floor(Math.random() * begreppData.length)].ord;
-                if (!options.includes(randomOption)) {
-                    options.push(randomOption);
-                }
-            }
-            options.sort(() => Math.random() - 0.5);
-
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = "";
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(btn, opt);
-                optionsDiv.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selectedBtn, selectedOption) {
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.disabled = true);
-
-            const feedbackDiv = document.getElementById('feedback');
-            const nextBtn = document.getElementById('next-btn');
-
-            if (selectedOption === currentCorrectAnswer) {
-                selectedBtn.classList.add('correct');
-                feedbackDiv.innerText = "Rätt svar! Bra jobbat! 🎉";
-                feedbackDiv.style.color = "#27ae60";
-                speakText("Rätt svar! Bra jobbat!");
-            } else {
-                selectedBtn.classList.add('wrong');
-                feedbackDiv.innerText = `Fel! Det rätta svaret var: ${currentCorrectAnswer}`;
-                feedbackDiv.style.color = "#e74c3c";
-                speakText(`Fel! Det rätta svaret var ${currentCorrectAnswer.replace('*', '')}`);
-                
-                buttons.forEach(btn => {
-                    if (btn.innerText === currentCorrectAnswer) btn.classList.add('correct');
-                });
-            }
-            nextBtn.style.display = "inline-block";
-        }
-
-        generateQuestion();
-    </script>
 </body>
 </html>

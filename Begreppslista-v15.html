@@ -25,17 +25,40 @@
             line-height: 1.6;
         }
 
+        /* منوی ناوبری چسبان */
         nav {
-            background-color: var(--nav-bg);
-            padding: 15px 0;
-            text-align: center;
+            background-color: #2d3748;
+            padding: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         nav a {
-            color: white;
+            color: #a0aec0;
             text-decoration: none;
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 15px 20px;
+            transition: all 0.3s;
+        }
+
+        nav a.active {
+            color: #ffffff;
+            border-bottom: 3px solid #48bb78;
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        nav a:hover:not(.active) {
+            color: #ffffff;
         }
 
         .container {
@@ -112,11 +135,11 @@
 </head>
 <body>
 
-    <nav style="background-color: #2d3748; padding: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-        <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-            <a href="index.html" style="color: #a0aec0; text-decoration: none; font-weight: 600; padding: 15px 20px; transition: all 0.3s;">🏠 Hem</a>
-            <a href="Begreppslista-v15.html" style="color: #ffffff; text-decoration: none; font-weight: 600; padding: 15px 20px; border-bottom: 3px solid #48bb78; background-color: rgba(255,255,255,0.05);">📖 Begrepp v.15</a>
-            <a href="helhetsperspektiv.html" style="color: #a0aec0; text-decoration: none; font-weight: 600; padding: 15px 20px; transition: all 0.3s;">🎯 Helhetsperspektiv</a>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">🏠 Hem</a>
+            <a href="Begreppslista-v15.html" class="active">📖 Begrepp v.15</a>
+            <a href="helhetsperspektiv.html">🎯 Helhetsperspektiv</a>
         </div>
     </nav>
 
@@ -148,7 +171,7 @@
 
         <div id="survey-section" class="box" style="display:none; text-align: center;">
             <h2 style="margin-top:0;">Vad tyckte du om den här lektionen?</h2>
-            <p style="color: #718096; font-size: 0.9rem;">Ditt betyg hjälper mir att förbättra innehållet.</p>
+            <p style="color: #718096; font-size: 0.9rem;">Ditt betyg hjälper mig att förbättra innehållet.</p>
             
             <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
                 <button class="survey-btn" onclick="sendQuickFeedback('Tråkigt/Svårt 😕')">😕</button>
@@ -162,96 +185,113 @@
     </div>
 
     <script>
-        // سوالات ۴ گزینه‌ای جدید و تخصصی
         const quizData = [
             {
-                fraga: "Vilket är det primära syftet med en Lex Sarah-anmälan?",
+                fraga: "Vad menas med begreppet 'Likvärdighet' enligt din ordlista?",
                 svar: [
-                    { text: "Att utreda och åtgärda missförhållanden eller påtagliga risker för missförhållanden inom socialtjänsten.", correct: true },
-                    { text: "Att straffa den personal که har gjort fel i sitt arbete.", correct: false },
-                    { text: "Att anmäla händelser som medfört en allvarlig vårdskada inom hälso- och sjukvården.", correct: false },
-                    { text: "Att dokumentera den enskildes personliga önskemål om sin framtida vård.", correct: false }
+                    { text: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård.", correct: true },
+                    { text: "Alla människor är olika och har unika förmågor.", correct: false },
+                    { text: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika.", correct: false },
+                    { text: "Förväntningar, tankar och oskrivna regler om hur någonting är.", correct: false }
                 ]
             },
             {
-                fraga: "En person har fått fel medicin inom den kommunala hälso- och sjukvården, vilket ledde till en allvarlig vårdskada. Enligt vilken lag ska detta anmälas till IVO?",
+                fraga: "Vad innebär 'Inkludering'?",
                 svar: [
-                    { text: "Lex Maria (enligt patientsäkerhetslagen).", correct: true },
-                    { text: "Lex Sarah (enligt socialtjänstlagen).", correct: false },
-                    { text: "LSS (Lagen om stöd och service för vissa funktionshindrade).", correct: false },
-                    { text: "Diskrimineringslagen.", correct: false }
+                    { text: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning, ålder eller bakgrund.", correct: true },
+                    { text: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika.", correct: false },
+                    { text: "Att man får tycka och tänka som man vill.", correct: false },
+                    { text: "Att en funktion är nedsatt och fungerar på ett annorند sätt.", correct: false }
                 ]
             },
             {
-                fraga: "Vem bär det yttersta ansvaret för att utreda en rapport om missförhållanden enligt Lex Sarah och vidta åtgärder?",
+                fraga: "Hur definieras 'Tillgänglighet' i din begreppslista?",
                 svar: [
-                    { text: "Den som bedriver verksamheten (t.ex. kommunen eller det privata företaget).", correct: true },
-                    { text: "Den undersköterska som upptäckte och rapporterade felet.", correct: false },
-                    { text: "Polismyndigheten.", correct: false },
-                    { text: "Den enskilde brukaren och dennes anhöriga.", correct: false }
+                    { text: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika och har olika behov.", correct: true },
+                    { text: "Att få vara med, påverka och känna att man är viktig i sitt eget liv.", correct: false },
+                    { text: "Beskriver hur en person fungerar fysiskt, psykiskt, kognitivt och socialt.", correct: false },
+                    { text: "Att a person får vara med och bestämma över sitt eget liv.", correct: false }
                 ]
             },
             {
-                fraga: "Vad menas med begreppet 'missförhållande' inom ramen för Lex Sarah?",
+                fraga: "Vad beskriver begreppet 'Funktionsförmåga'?",
                 svar: [
-                    { text: "Handlingar eller underlåtelser som innebär hot mot eller medför konsekvenser för enskildas liv, säkerhet eller hälsa.", correct: true },
-                    { text: "Att en anställd har glömt att stämpla in på sitt arbetspass.", correct: false },
-                    { text: "Att maten i matsalen inte smakade bra en viss dag.", correct: false },
-                    { text: "Att verksamheten har svårt att rekrytera behörig personal.", correct: false }
+                    { text: "Hur en person fungerar fysiskt, psykiskt, kognitivt och socialt.", correct: true },
+                    { text: "Att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls.", correct: false },
+                    { text: "När omgivningen gör det svårt för en person med funktionsnedsättning.", correct: false },
+                    { text: "Betyder att få vara med, påverka och känna att man är viktig i sitt eget liv.", correct: false }
                 ]
             },
             {
-                fraga: "Vad står förkortningen IVO för?",
+                fraga: "När uppstår ett 'Funktionshinder' enligt listan?",
                 svar: [
-                    { text: "Inspektionen för vård och omsorg.", correct: true },
-                    { text: "Institutionen för vård och omvårdnad.", correct: false },
-                    { text: "Internationella vårdorganisationen.", correct: false },
-                    { text: "Inkluderande vård och omsorg.", correct: false }
+                    { text: "När omgivningen gör det svårt för en person med funktionsnedsättning att vara delaktig på lika villkor.", correct: true },
+                    { text: "När en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls.", correct: false },
+                    { text: "När man föds med nedsatt rörelseförmåga, syn eller hörsel.", correct: false },
+                    { text: "När man har svårt att skapa och bibehålla relationer.", correct: false }
                 ]
             },
             {
-                fraga: "När har du som personal skyldighet att rapportera enligt Lex Sarah?",
+                fraga: "Vad är rätt definition för 'Funktionsnedsättning'?",
                 svar: [
-                    { text: "Genast när jag upptäcker eller misstänker ett missförhållande.", correct: true },
-                    { text: "Bara om den drabbade brukaren ber mig göra det.", correct: false },
-                    { text: "I slutet av månaden när jag skriver min vanliga rapport.", correct: false },
-                    { text: "Bara om felet begicks av en nyanställd kollega.", correct: false }
+                    { text: "Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls.", correct: true },
+                    { text: "När omgivningen gör det svårt för en person att vara delaktig.", correct: false },
+                    { text: "Förväntningar, tankar och oskrivna regler om hur någonting är.", correct: false },
+                    { text: "Att få vara med, påverka och känna att man är viktig i sitt eget liv.", correct: false }
                 ]
             },
             {
-                fraga: "Vilken lag reglerar tystnadsplikten inom den privata vården och omsorgen?",
+                fraga: "Vad menas med 'Kognitiv funktionsförmåga'?",
                 svar: [
-                    { text: "Socialtjänstlagen (SoL).", correct: true },
-                    { text: "Offentlighets- och sekretesslagen (OSL).", correct: false },
-                    { text: "Arbetsmiljölagen.", correct: false },
-                    { text: "Hälso- och sjukvårdslagen (HSL).", correct: false }
+                    { text: "Handlar om inlärning, minne, att ta in information eller bli störd av olika ljud.", correct: true },
+                    { text: "Handlar om svårigheter med att skapa och bibehålla relationer.", correct: false },
+                    { text: "Innebär nedsatt rörelseförmåga, nedsatt syn eller nedsatt hörsel.", correct: false },
+                    { text: "Handlar om trauma, sexuella övergrepp, krig eller livssituation.", correct: false }
                 ]
             },
             {
-                fraga: "Vad innebär begreppet 'Självbestämmande' (Autonomi) i praktiken?",
+                fraga: "Vilket ord beskriver: 'Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara'?",
                 svar: [
-                    { text: "Att den enskilde har rätt att bestämma över sitt eget liv och sina insatser så långt det är möjligt.", correct: true },
-                    { text: "Att personalen bestämmer vad som är bäst för brukaren eftersom de har utbildning.", correct: false },
-                    { text: "Att de anhöriga fattar alla beslut åt den äldre personen.", correct: false },
-                    { text: "Att alla på boendet måste följa exakt samma dygnsrytm.", correct: false }
+                    { text: "Normer", correct: true },
+                    { text: "Värderingar", correct: false },
+                    { text: "Levnadsvillkor", correct: false },
+                    { text: "Likvärdighet", correct: false }
                 ]
             },
             {
-                fraga: "Vad är syftet med genomförandeplanen?",
+                fraga: "Vad innebär 'Delaktighet'?",
                 svar: [
-                    { text: "Att skapa en tydlig struktur för hur den beviljade insatsen ska utföras utifrån brukarens önskemål.", correct: true },
-                    { text: "Att dokumentera personalens arbetstider och raster.", correct: false },
-                    { text: "Att skriva ner alla medicinska diagnoser som personen har.", correct: false },
-                    { text: "Att fungera som ett kvitto till Försäkringskassan.", correct: false }
+                    { text: "Att få vara med, påverka och känna att man är viktig i sitt eget liv.", correct: true },
+                    { text: "Att alla människor är olika och har unika förmågor.", correct: false },
+                    { text: "Att man får tycka och tänka som man vill.", correct: false },
+                    { text: "Att en person får vara med och bestämma över sitt eget liv.", correct: false }
                 ]
             },
             {
-                fraga: "Om du bryter mot tystnadsplikten, vad kan konsekvensen bli?",
+                fraga: "Enligt Delaktighetsmodellen, vad innebär 'Autonomi'?",
                 svar: [
-                    { text: "Det är ett lagbrott som kan leda till böter eller fängelse samt arbetsrättsliga åtgärder.", correct: true },
-                    { text: "Ingenting, så länge man bara berättar för sina egna familjemedlemmar.", correct: false },
-                    { text: "Bara att chefen ger en muntlig varning.", correct: false },
-                    { text: "Man blir skyldig att bjuda fika till hela avdelningen.", correct: false }
+                    { text: "Rätten till självbestämmande. Man ska kunna påverka sitt liv även om man har en funktionsnedsättning.", correct: true },
+                    { text: "Att man ska vara accepterad av alla och bli lyssnad på i vårdsituationer.", correct: false },
+                    { text: "Att man ska känna lust, ha intresse och en vilja att vara med.", correct: false },
+                    { text: "Att man ska kunna delta och bidra i gemensamma aktiviteter.", correct: false }
+                ]
+            },
+            {
+                fraga: "Vad handlar 'Livskvalitet' om enligt listan?",
+                svar: [
+                    { text: "Brukarens hälsa och välmående. Att känna sig välkommen, behövd och ha en meningsfull fritid.", correct: true },
+                    { text: "Hur en person lever och vilka möjligheter personen har till ett bra och tryggt liv.", correct: false },
+                    { text: "Att alla människor är olika och har unika förmågor.", correct: false },
+                    { text: "Förväntningar, tankار och oskrivna regler om hur någonting är.", correct: false }
+                ]
+            },
+            {
+                fraga: "Vad är definitionen av 'Självbestämmande'?",
+                svar: [
+                    { text: "Betyder att en person får vara med och bestämma över sitt eget liv.", correct: true },
+                    { text: "Att få vara med, påverka och känna att man är viktig i sitt eget liv.", correct: false },
+                    { text: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård.", correct: false },
+                    { text: "Att man ska vara accepterad av alla och bli lyssnad på.", correct: false }
                 ]
             }
         ];

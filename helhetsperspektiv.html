@@ -8,7 +8,7 @@
         :root {
             --bg-color: #f7fafc;
             --text-color: #2d3748;
-            --primary-color: #e06c75; /* یک تم رنگی جدید برای این درس (زرشکی ملایم) */
+            --primary-color: #e06c75;
             --primary-hover: #be5059;
             --card-bg: #ffffff;
             --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -247,6 +247,17 @@
         }
 
         .next-btn:hover { background-color: var(--primary-hover); }
+
+        /* بخش جدید برای نمایش بالاترین امتیاز قبلی */
+        .high-score {
+            text-align: center;
+            background: #edf2f7;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #4a5568;
+        }
     </style>
 </head>
 <body>
@@ -260,6 +271,8 @@
         <h1>Ett helhetsperspektiv</h1>
         <p class="subtitle">Träna på begrepp från Kapitel 1. Klicka på korten för att lyssna.</p>
 
+        <div id="high-score-box" class="high-score">🏆 Bästa resultat: Inget sparat än</div>
+
         <div id="player" class="audio-player">
             <div class="audio-title">🔊 Nu spelas:</div>
             <div id="playing-text" class="audio-text"></div>
@@ -272,22 +285,20 @@
             <div id="question-text" class="question">Laddar fråga...</div>
             <div id="options" class="options-grid"></div>
             <div id="feedback"></div>
-            <button id="next-btn" class="next-btn" onclick="generateQuestion()">Nästa fråga ➡️</button>
+            <button id="next-btn" class="next-btn" onclick="nextQuestion()">Nästa fråga ➡️</button>
         </div>
 
     </div>
 
     <script>
-        // دیتابیس کلمات بر اساس پاورپوینت شما
         const begreppData = [
             { ord: "Helhetsperspektiv", beskrivning: "Att se hela människan och inte bara en funktionsnedsättning eller sjukdom." },
             { ord: "Demokratisk värdegrund", beskrivning: "Handlar om att alla människor är fria, har lika värde och rätt att vara sig själva." },
             { ord: "Inkludering", beskrivning: "Att alla får vara med och känna gemenskap oavsett förutsättningar." },
-            { ord: "Delaktighet", beskrivning: "Att ha inflytande och kunna bestämma över sitt eget liv." },
-            { ord: "Autonomi", beskrivning: "Självbestämmande. Att individen har rätt att fatta egna beslut." }
+            { ord: "Delaktighet", beskrivning: "Att ha inflytande och kunna bestämما over sitt eget liv." },
+            { ord: "Autonomi", beskrivning: "Sجودبسندگی. Att individen har rätt att fatta egna beslut." }
         ];
 
-        // دیتابیس سوالات کوییز بر اساس متن شما
         const quizData = [
             {
                 fraga: "Vad innebär 'Inkludering' enligt texten?",
@@ -315,6 +326,29 @@
             }
         ];
 
+        // متغیرهای سیستم نمره‌دهی
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalQuestions = quizData.length;
+
+        // کدهای مربوط به حافظه LocalStorage
+        function loadHighScore() {
+            const savedScore = localStorage.getItem('highScore_helhet');
+            const scoreBox = document.getElementById('high-score-box');
+            if (savedScore) {
+                scoreBox.innerText = `🏆 Bästa resultat: ${savedScore} av ${totalQuestions} rätt`;
+            }
+        }
+
+        function saveHighScore() {
+            const savedScore = localStorage.getItem('highScore_helhet');
+            // اگر امتیازی نبود یا امتیاز جدید از قبلی بزرگتر بود، ذخیره کن
+            if (!savedScore || score > parseInt(savedScore)) {
+                localStorage.setItem('highScore_helhet', score);
+                loadHighScore();
+            }
+        }
+
         const listContainer = document.getElementById('words-list');
         begreppData.forEach(item => {
             const card = document.createElement('div');
@@ -339,7 +373,6 @@
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'sv-SE';
             msg.rate = 0.85;
-
             msg.onend = function() { playerDiv.classList.remove('active'); };
             window.speechSynthesis.speak(msg);
         }
@@ -349,20 +382,20 @@
             if (header.parentElement.classList.contains('open')) { speakText(text); }
         }
 
-        let currentQuestionIndex = 0;
-
         function generateQuestion() {
             const feedbackDiv = document.getElementById('feedback');
             const nextBtn = document.getElementById('next-btn');
             feedbackDiv.innerText = "";
-            feedbackDiv.style.color = "inherit";
             nextBtn.style.display = "none";
 
-            // انتخاب تصادفی سوالات
-            currentQuestionIndex = Math.floor(Math.random() * quizData.length);
+            // اگر سوالات تمام شده بود، کارنامه را نشان بده
+            if (currentQuestionIndex >= totalQuestions) {
+                showResultCard();
+                return;
+            }
+
             const currentQuiz = quizData[currentQuestionIndex];
-            
-            document.getElementById('question-text').innerText = currentQuiz.fraga;
+            document.getElementById('question-text').innerText = `Fråga ${currentQuestionIndex + 1}/${totalQuestions}: ${currentQuiz.fraga}`;
             speakText(`Fråga: ${currentQuiz.fraga}`);
 
             const optionsDiv = document.getElementById('options');
@@ -372,12 +405,12 @@
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
                 btn.innerText = ans.text;
-                btn.onclick = () => checkAnswer(btn, ans.correct, ans.text);
+                btn.onclick = () => checkAnswer(btn, ans.correct);
                 optionsDiv.appendChild(btn);
             });
         }
 
-        function checkAnswer(selectedBtn, isCorrect, text) {
+        function checkAnswer(selectedBtn, isCorrect) {
             const buttons = document.querySelectorAll('.option-btn');
             buttons.forEach(btn => btn.disabled = true);
 
@@ -386,25 +419,65 @@
 
             if (isCorrect) {
                 selectedBtn.classList.add('correct');
-                feedbackDiv.innerText = "Rätt svar! Bra jobbat! 🎉";
+                feedbackDiv.innerText = "Rätt svar! 🎉";
                 feedbackDiv.style.color = "#27ae60";
-                speakText("Rätt svar! Bra jobbat!");
+                speakText("Rätt svar!");
+                score++;
             } else {
                 selectedBtn.classList.add('wrong');
-                feedbackDiv.innerText = "Fel svar! Försök igen.";
+                feedbackDiv.innerText = "Fel svar!";
                 feedbackDiv.style.color = "#e74c3c";
                 speakText("Fel svar!");
                 
-                // پیدا کردن و سبز کردن جواب درست
-                const currentQuiz = quizData[currentQuestionIndex];
-                const correctObj = currentQuiz.svar.find(o => o.correct === true);
+                // نشان دادن جواب درست
                 buttons.forEach(btn => {
+                    const currentQuiz = quizData[currentQuestionIndex];
+                    const correctObj = currentQuiz.svar.find(o => o.correct === true);
                     if (btn.innerText === correctObj.text) btn.classList.add('correct');
                 });
             }
             nextBtn.style.display = "inline-block";
         }
 
+        function nextQuestion() {
+            currentQuestionIndex++;
+            generateQuestion();
+        }
+
+        // بخش جدید: نمایش کارنامه نهایی
+        function showResultCard() {
+            const quizSection = document.getElementById('quiz-section');
+            const percentage = Math.round((score / totalQuestions) * 100);
+            
+            saveHighScore(); // تلاش برای ذخیره رکورد جدید
+
+            quizSection.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h2 style="margin-top:0; color:var(--primary-color);">Testet är klart! 🏁</h2>
+                    <p style="font-size: 1.4rem; font-weight: bold;">Du fick ${score} av ${totalQuestions} rätt.</p>
+                    <p style="font-size: 1.2rem; color: #718096;">Resultat: ${percentage}%</p>
+                    <button class="next-btn" style="display:inline-block; margin-top:20px;" onclick="resetQuiz()">Gör testet igen 🔄</button>
+                </div>
+            `;
+            speakText(`Testet är klart! Du fick ${score} av ${totalQuestions} rätt.`);
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            // برگرداندن ظاهر اولیه بخش کوئیز
+            const quizSection = document.getElementById('quiz-section');
+            quizSection.innerHTML = `
+                <div id="question-text" class="question">Laddar fråga...</div>
+                <div id="options" class="options-grid"></div>
+                <div id="feedback"></div>
+                <button id="next-btn" class="next-btn" onclick="nextQuestion()">Nästa fråga ➡️</button>
+            `;
+            generateQuestion();
+        }
+
+        // لود کردن رکورد قبلی در هنگام باز شدن صفحه
+        loadHighScore();
         generateQuestion();
     </script>
 </body>

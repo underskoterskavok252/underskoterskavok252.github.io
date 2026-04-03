@@ -34,6 +34,7 @@
             border-radius: 16px;
             box-shadow: var(--card-shadow);
             text-align: center;
+            margin: 40px 0;
         }
 
         h1 {
@@ -92,25 +93,43 @@
 </head>
 <body>
 
-    <div style="background-color: #edf2f7; padding: 25px; border-radius: 12px; margin-top: 40px; text-align: left;">
+    <div class="container">
+        <h1>Vård och Omsorg</h1>
+        <p class="subtitle">En resurssida för undersköterska-studenter. Välj ett ämne för att börja plugga!</p>
+
+        <a href="Begreppslista-v15.html" class="menu-link link-green">
+            <span>📖</span> Begreppslista Vecka 15
+        </a>
+
+        <a href="aldre-multisjuka.html" class="menu-link link-blue">
+            <span>👵</span> Äldre multisjuka
+        </a>
+
+        <a href="helhetsperspektiv.html" class="menu-link link-pink">
+            <span>🎯</span> Ett helhetsperspektiv
+        </a>
+
+        <div style="background-color: #edf2f7; padding: 25px; border-radius: 12px; margin-top: 40px; text-align: left;">
             <h2 style="margin-top: 0; color: #2d3748; font-size: 1.5rem;">Hjälp mig att bli bättre! 🚀</h2>
             <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">Har du hittat ett fel eller har du förslag på nya lektioner? Skriv till mig här.</p>
             
             <form action="https://formspree.io/f/xqegybzg" method="POST">
                 <label style="font-weight: 600; display: block; margin-bottom: 5px;">Vad gäller det?</label>
                 <select name="typ_av_feedback" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; margin-bottom: 15px;">
-                    <option value="Förslag på ny lektion">Förslag på ny lektion (پیشنهاد درس جدید)</option>
-                    <option value="Innehållsfel">Innehållsfel (اشتباه در محتوا)</option>
-                    <option value="Tekniskt fel / Ljud">Tekniskt fel / Ljud (مشکل فنی یا صدا)</option>
-                    <option value="Annat">Annat (سایر موارد)</option>
+                    <option value="Förslag på ny lektion">Förslag på ny lektion</option>
+                    <option value="Innehållsfel">Innehållsfel</option>
+                    <option value="Tekniskt fel / Ljud">Tekniskt fel / Ljud</option>
+                    <option value="Annat">Annat</option>
                 </select>
 
                 <label style="font-weight: 600; display: block; margin-bottom: 5px;">Ditt meddelande:</label>
-                <textarea name="meddelande" rows="4" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; margin-bottom: 15px;" placeholder="Skriv här..."></textarea>
+                <textarea name="meddelande" rows="4" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; margin-bottom: 15px;" placeholder="Skriv här..." required></textarea>
                 
                 <button type="submit" style="background-color: #2d3748; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%;">Skicka meddelande</button>
             </form>
         </div>
+
+        <div class="footer">
             Denna sida är skapad för att underlätta för klasskamrater.
         </div>
     </div>

@@ -8,7 +8,7 @@
         :root {
             --bg-color: #f0f4f8;
             --text-color: #2d3748;
-            --primary-color: #48bb78; /* Green for Week 15 */
+            --primary-color: #48bb78;
             --primary-hover: #3da36b;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
@@ -26,7 +26,6 @@
             line-height: 1.6;
         }
 
-        /* Navigering */
         nav {
             background-color: var(--nav-bg);
             padding: 0;
@@ -81,7 +80,6 @@
 
         .section-title { font-size: 1.5rem; color: var(--text-color); margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 
-        /* Auth Section */
         #auth-section { text-align: center; }
         input[type="text"] {
             width: 100%; max-width: 300px; padding: 14px; border: 2px solid var(--border-color); border-radius: 10px;
@@ -105,9 +103,10 @@
         .flashcard-container {
             perspective: 1000px;
             width: 100%;
-            height: 200px;
+            height: 220px;
             cursor: pointer;
             margin-bottom: 20px;
+            position: relative;
         }
 
         .flashcard {
@@ -132,7 +131,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 20px 40px;
             box-sizing: border-box;
             border-radius: 16px;
             border: 1px solid var(--border-color);
@@ -153,6 +152,37 @@
             text-align: center;
         }
 
+        /* دکمه صدا */
+        .speak-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .speak-btn:hover {
+            transform: scale(1.1);
+            background-color: #ffffff;
+        }
+        .back .speak-btn {
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+        }
+        .back .speak-btn:hover {
+            background-color: rgba(0,0,0,0.3);
+        }
+
         .practice-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 10px;}
         .practice-btn { width: 48%; }
         .btn-quiz-start { width: 100%; margin-top: 30px; background-color: var(--nav-bg); font-size: 1.2rem;}
@@ -161,7 +191,6 @@
         /* --- Quizsektion --- */
         #quiz-section { display: none; }
         
-        /* Progress Bar */
         .progress-container {
             width: 100%; background-color: #e2e8f0; border-radius: 10px; height: 10px; margin-bottom: 20px; overflow: hidden;
         }
@@ -194,11 +223,9 @@
         .survey-btn:hover { background-color: #f0fff4; border-color: var(--primary-color); transform: scale(1.1); }
         #survey-thanks { color: #27ae60; font-weight: 700; display: none; margin-top: 15px; }
 
-        /* Result Screen */
         .result-screen { text-align: center; }
         .result-score { font-size: 3rem; font-weight: 800; color: var(--primary-color); margin: 20px 0; }
 
-        /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
             .front { font-size: 1.4rem; }
@@ -221,7 +248,7 @@
     <div class="container">
         
         <h1>Begreppslista Vecka 15</h1>
-        <p class="page-subtitle">Öva på begreppen först, ta sedan quizzet för att testa dina kunskaper.</p>
+        <p class="page-subtitle">Lyssna på uttalet, öva på begreppen och ta sedan quizzet.</p>
 
         <div id="auth-section" class="box">
             <div id="register-form">
@@ -234,17 +261,23 @@
             <div id="welcome-message" style="display:none;">
                 <h2 class="welcome-title">Hej <span id="display-name"></span>! 👋</h2>
                 <p id="high-score-text" style="font-weight: 600; color: #4a5568;">🏆 Bästa quiz-resultat: Inget än</p>
-                <button class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.9rem;" onclick="clearMemory()">Logga ut / Rensa minne</button>
+                <button class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.9rem;" onclick="clearMemory()">Logga ut / Rensa minنه</button>
             </div>
         </div>
 
         <div id="practice-section" class="box">
             <h2 class="section-title"><span>🧠</span> Steg 1: Övning (Klicka på kortet)</h2>
             
-            <div class="flashcard-container" id="flashcard-container" onclick="flipCard()">
-                <div class="flashcard">
-                    <div class="front" id="card-front">Laddar...</div>
-                    <div class="back" id="card-back">Laddar...</div>
+            <div class="flashcard-container" id="flashcard-container">
+                <div class="flashcard" id="flashcard-element" onclick="flipCard()">
+                    <div class="front">
+                        <button class="speak-btn" onclick="speakText(event, 'front')">🔊</button>
+                        <span id="card-front">Laddar...</span>
+                    </div>
+                    <div class="back">
+                        <button class="speak-btn" onclick="speakText(event, 'back')">🔊</button>
+                        <span id="card-back">Laddar...</span>
+                    </div>
                 </div>
             </div>
 
@@ -276,7 +309,6 @@
 
         <div id="survey-section" class="box">
             <h2 class="section-title"><span>⭐</span> Vad tyckte du om den här lektionen?</h2>
-            <p style="color: #718096; margin-bottom: 20px;">Ditt betyg hjälper mig att förbättra innehållet.</p>
             <div style="display: flex; justify-content: center;">
                 <button class="survey-btn" onclick="sendQuickFeedback('😕')">😕</button>
                 <button class="survey-btn" onclick="sendQuickFeedback('🙂')">🙂</button>
@@ -288,7 +320,6 @@
     </div>
 
     <script>
-        // دیتای ۱۹ واژه و تعریف از فایل ورد شما
         const begreppData = [
             { begrepp: "Demokratisk värdegrund", definition: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
             { begrepp: "Lika värde", definition: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
@@ -299,7 +330,7 @@
             { begrepp: "Delaktighet", definition: "Att få vara med, påverka och känna att man är viktig i sitt eget liv." },
             { begrepp: "Delaktighetsmodellen", definition: "Ett arbetssätt för att stärka inflytande och självbestämmande, bygger på 6 delar." },
             { begrepp: "Livskvalitet", definition: "Brukarens hälsa och välmående. Att känna sig välkommen, behövd och ha en meningsfull fritid." },
-            { begrepp: "Normer", definition: "Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara." },
+            { begrepp: "Normer", definition: "Förväntningar, tankار och oskrivna regler om hur någonting är eller ska vara." },
             { begrepp: "Värderingar", definition: "Att man får tycka och tänka som man vill och det styr vad vi gör och vad vi säger." },
             { begrepp: "Funktionsförmåga", definition: "Hur en person fungerar fysiskt, psykiskt, kognitivt och socialt." },
             { begrepp: "Fysisk funktionsförmåga", definition: "Innebär nedsatt rörelseförmåga, nedsatt syn eller nedsatt hörsel." },
@@ -311,7 +342,6 @@
             { begrepp: "Självbestämmande", definition: "Betyder att en person får vara med och bestämma över sitt eget liv." }
         ];
 
-        // کوئیز داده‌ها (همان ۱۹ سوال قبلی)
         const quizData = [
             { fraga: "Vilket begrepp innebär att: 'Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga...'?", svar: [{text:"Demokratisk värdegrund", correct:true}, {text:"Levnadsvillkor", correct:false}, {text:"Normer", correct:false}, {text:"Delaktighetsmodellen", correct:false}] },
             { fraga: "Vilket begrepp beskriver att: 'Alla människor är olika och har unika förmågor.'?", svar: [{text:"Lika värde", correct:true}, {text:"Likvärdighet", correct:false}, {text:"Livskvalitet", correct:false}, {text:"Självbestämmande", correct:false}] },
@@ -328,20 +358,17 @@
             { fraga: "Vad innebär nedsatt rörelseförmåga, nedsatt syn eller hörsel?", svar: [{text:"Fysisk funktionsförmåga (nedsatt)", correct:true}, {text:"Kognitiv funktionsförmåga", correct:false}, {text:"Social funktionsförmåga", correct:false}, {text:"Normer", correct:false}] },
             { fraga: "Vad påverkar enligt listan den 'Psykiska funktionsförmågan'?", svar: [{text:"Trauma, krig, livssituation.", correct:true}, {text:"Medfödda rörelsehinder.", correct:false}, {text:"Svårigheter med inlärning.", correct:false}, {text:"Nya relationer.", correct:false}] },
             { fraga: "Vad innebär nedsatt 'Kognitiv funktionsförmåga'?", svar: [{text:"Svårt med inlärning, minne, ta in information.", correct:true}, {text:"Nedsatt syn och hörsel.", correct:false}, {text:"Svårt att skapa relationer.", correct:false}, {text:"Ingen rätt till självbestämmande.", correct:false}] },
-            { fraga: "Vad innebär nedsatt 'Social funktionsförmåga'?", svar: [{text:"Svårigheter med att skapa och bibehålla relationer.", correct:true}, {text:"Svårigheter med minne.", correct:false}, {text:"Problem att röra sig fritt.", correct:false}, {text:"Att inte bli accepterad.", correct:false}] },
+            { fraga: "Vad innebär nedsatt 'Social funktionsförmåga'?", svar: [{text:"Svårigheter med att skapa och bibehålla relationer.", correct:true}, {text:"Svårigheter med minne.", correct:false}, {text:"Problem att röra sig fritt.", correct:false}, {text:"Att nicht bli accepterad.", correct:false}] },
             { fraga: "Vilket begrepp betyder: 'Att en funktion är nedsatt och fungerar annorlunda.'?", svar: [{text:"Funktionsnedsättning", correct:true}, {text:"Funktionshinder", correct:false}, {text:"Inkludering", correct:false}, {text:"Samhandling", correct:false}] },
             { fraga: "Vad är ett 'Funktionshinder' enligt texten?", svar: [{text:"Uppstår när omgivningen gör det svårt för en person.", correct:true}, {text:"Samma sak som medfödd nedsättning.", correct:false}, {text:"Bara psykisk ohälsa.", correct:false}, {text:"Personalen bestämmer allt.", correct:false}] },
             { fraga: "Vad betyder begreppet 'Självbestämmande'?", svar: [{text:"Att en person får vara med och bestämma över sitt eget liv.", correct:true}, {text:"Att personalen fattar alla beslut.", correct:false}, {text:"Att man följer oskrivna regler.", correct:false}, {text:"Lika rätt till vård.", correct:false}] }
         ];
 
-        // متغیرهای وضعیت سیستم
         let userName = "";
         let currentCardIndex = 0;
         let currentQuestionIndex = 0;
         let score = 0;
-        let isFlipped = false;
 
-        // بارگذاری اولیه
         window.onload = function() {
             const savedName = localStorage.getItem('student_name_v15');
             if (savedName) {
@@ -350,7 +377,6 @@
             }
         }
 
-        // --- مدیریت کاربر ---
         function registerUser() {
             const nameInput = document.getElementById('user-name-input').value.trim();
             if (nameInput === "") { alert("Vänligen fyll i ditt namn!"); return; }
@@ -368,14 +394,13 @@
             if (savedScore) {
                 document.getElementById('high-score-text').innerText = `🏆 Bästa quiz-resultat: ${savedScore} av ${quizData.length} rätt`;
             }
-            startPracticeSection(); // همیشه با تمرین شروع کن
+            startPracticeSection();
         }
 
         function clearMemory() { localStorage.clear(); location.reload(); }
 
-        // --- مدیریت بخش تمرین (Flashcards) ---
         function startPracticeSection() {
-            document.getElementById('auth-section').classList.remove('box'); // مخفی کردن کادر لاگین
+            document.getElementById('auth-section').classList.remove('box');
             document.getElementById('quiz-section').style.display = 'none';
             document.getElementById('survey-section').style.display = 'none';
             document.getElementById('practice-section').style.display = 'block';
@@ -384,7 +409,6 @@
         }
 
         function updateCard() {
-            isFlipped = false;
             document.getElementById('flashcard-container').classList.remove('flip');
             document.getElementById('card-front').innerText = begreppData[currentCardIndex].begrepp;
             document.getElementById('card-back').innerText = begreppData[currentCardIndex].definition;
@@ -392,7 +416,6 @@
         }
 
         function flipCard() {
-            isFlipped = !isFlipped;
             document.getElementById('flashcard-container').classList.toggle('flip');
         }
 
@@ -412,7 +435,22 @@
             }
         }
 
-        // --- مدیریت بخش کوئیز ---
+        // قابلیت خواندن متن به زبان سوئدی
+        function speakText(event, side) {
+            event.stopPropagation(); // جلوگیری از چرخیدن کارت موقع کلیک روی دکمه صدا
+            
+            const text = side === 'front' ? begreppData[currentCardIndex].begrepp : begreppData[currentCardIndex].definition;
+            
+            // کنسل کردن صداهای قبلی در حال پخش
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'sv-SE'; // تنظیم زبان روی سوئدی
+            utterance.rate = 0.9; // سرعت خواندن کمی آرام‌تر برای یادگیری بهتر
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
         function startQuizSection() {
             document.getElementById('practice-section').style.display = 'none';
             document.getElementById('quiz-section').style.display = 'block';
@@ -437,7 +475,6 @@
             document.getElementById('feedback').style.color = "inherit";
             document.getElementById('next-btn').style.display = "none";
 
-            // شافل کردن گزینه‌ها برای چالش بیشتر
             const shuffledSvar = [...currentQuiz.svar].sort(() => Math.random() - 0.5);
 
             shuffledSvar.forEach(ans => {
@@ -451,7 +488,7 @@
 
         function checkAnswer(selectedBtn, isCorrect) {
             const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.disabled = true); // غیرفعال کردن همه دکمه‌ها
+            buttons.forEach(btn => btn.disabled = true);
 
             if (isCorrect) {
                 selectedBtn.classList.add('correct');
@@ -462,7 +499,6 @@
                 selectedBtn.classList.add('wrong');
                 document.getElementById('feedback').innerText = "Fel svar!";
                 document.getElementById('feedback').style.color = "#e74c3c";
-                // نشان دادن پاسخ صحیح
                 buttons.forEach(btn => {
                     if (quizData[currentQuestionIndex].svar.find(o => o.correct).text === btn.innerText) {
                         btn.classList.add('correct');
@@ -482,12 +518,12 @@
         }
 
         function showResults() {
-            updateProgressBar(); // پر شدن نوار تا آخر
+            updateProgressBar();
             document.getElementById('next-btn').style.display = "none";
             
             let message = "";
             if (score === quizData.length) message = "Helt fantastiskt! Alla rätt! 🌟";
-            else if (score >= 15) message = "Grah! Mycket bra jobbat! 🔥";
+            else if (score >= 15) message = "Grymt! Mycket bra jobbat! 🔥";
             else if (score >= 10) message = "Bra kämpat! Du är på god väg. 👍";
             else message = "Öva lite till på korten och försök igen! 💪";
 
@@ -500,22 +536,20 @@
                 </div>
             `;
             
-            // ذخیره بهترین امتیاز
             const topScore = localStorage.getItem('quiz_score_v15');
             if (!topScore || score > parseInt(topScore)) {
                 localStorage.setItem('quiz_score_v15', score);
             }
             
-            document.getElementById('survey-section').style.display = 'block'; // نمایش نظرخواهی در انتها
+            document.getElementById('survey-section').style.display = 'block';
         }
 
-        // --- مدیریت نظرخواهی ---
         function sendQuickFeedback(ratingText) {
             const formspreeUrl = "https://formspree.io/f/xqegybzg"; 
             fetch(formspreeUrl, {
                 method: 'POST',
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ student_name: userName, lesson: "Begreppslista v15 (Practice+Quiz)", rating: ratingText, score: `${score}/${quizData.length}` })
+                body: JSON.stringify({ student_name: userName, lesson: "Begreppslista v15 (Audio+Practice+Quiz)", rating: ratingText, score: `${score}/${quizData.length}` })
             })
             .then(response => { if (response.ok) { document.getElementById('survey-thanks').style.display = 'block'; } });
         }

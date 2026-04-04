@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vård och Omsorg - Startsida</title>
+    <title>Vård & Omsorg - Hem</title>
     <style>
         :root {
             --bg-color: #f0f4f8;
             --text-color: #2d3748;
-            --primary-color: #4299e1;
+            --primary-color: #e06c75;
+            --primary-hover: #be5059;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
             --nav-bg: #2d3748;
@@ -46,7 +47,7 @@
         }
 
         nav .nav-container {
-            max-width: 800px;
+            max-width: 1200px; /* عریض‌تر شدن منو */
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -67,7 +68,7 @@
 
         nav a.active {
             color: #ffffff;
-            border-bottom: 3px solid #48bb78;
+            border-bottom: 3px solid var(--primary-color);
             background-color: rgba(255,255,255,0.05);
         }
 
@@ -81,82 +82,30 @@
         .theme-toggle:hover { color: #fff; border-color: #fff; }
 
         .container {
-            max-width: 600px; margin: 40px auto;
-            padding: 0 20px; padding-bottom: 50px;
+            max-width: 1200px; /* عریض‌تر شدن صفحه اصلی */
+            margin: 30px auto;
+            padding: 0 20px;
             flex: 1;
         }
 
+        h1 { color: var(--primary-color); text-align: center; font-weight: 800; font-size: 2.2rem; margin-bottom: 10px; }
+        .page-subtitle { text-align: center; color: #718096; margin-bottom: 30px; font-size: 1.1rem; }
+        
         .box {
-            background-color: var(--card-bg); padding: 40px; border-radius: 16px;
+            background-color: var(--card-bg); padding: 30px; border-radius: 16px;
             border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: var(--shadow-md);
             transition: background-color 0.3s, border-color 0.3s;
-            text-align: center;
         }
 
-        h1 { color: var(--primary-color); text-align: center; font-weight: 800; font-size: 2.3rem; margin-bottom: 10px; margin-top: 0; }
-        .subtitle { text-align: center; color: #718096; margin-bottom: 30px; font-size: 1.1rem; }
-        
-        .menu-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            padding: 16px 25px;
-            border-radius: 12px;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-md);
+        .section-title { font-size: 1.5rem; color: var(--text-color); margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+
+        .btn {
+            display: inline-block; background-color: var(--primary-color); color: white; text-decoration: none;
+            padding: 14px 28px; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 700;
+            transition: background 0.2s, transform 0.1s; border: none;
         }
+        .btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
 
-        .menu-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-
-        .menu-link span { margin-right: 12px; font-size: 1.4rem; }
-
-        .link-green { background-color: #48bb78; }
-        .link-green:hover { background-color: #3da36b; }
-
-        .link-red { background-color: #e06c75; }
-        .link-red:hover { background-color: #be5059; }
-
-        /* بخش فرم بازخورد */
-        .feedback-section {
-            background-color: var(--bg-color);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 40px;
-            text-align: left;
-            border: 1px solid var(--border-color);
-            transition: background-color 0.3s;
-        }
-
-        .feedback-section h2 { margin-top: 0; color: var(--text-color); font-size: 1.4rem; font-weight: 700; }
-        .feedback-section p { color: #718096; font-size: 0.95rem; margin-bottom: 20px; }
-
-        label { font-weight: 600; display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.9rem; }
-        
-        select, textarea {
-            width: 100%; padding: 12px; border-radius: 8px; border: 2px solid var(--border-color);
-            margin-bottom: 15px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem;
-            background-color: var(--card-bg); color: var(--text-color); transition: border-color 0.2s;
-        }
-        select:focus, textarea:focus { border-color: var(--primary-color); outline: none; }
-
-        .btn-submit {
-            background-color: var(--nav-bg); color: white; border: none; padding: 14px 20px;
-            border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .btn-submit:hover { background-color: #4a5568; transform: translateY(-1px); }
-        [data-theme="dark"] .btn-submit { background-color: #4299e1; }
-        [data-theme="dark"] .btn-submit:hover { background-color: #3182ce; }
-
-        /* بخش کپی‌رایت انتهای صفحه */
         footer {
             background-color: var(--nav-bg);
             color: #a0aec0;
@@ -167,11 +116,6 @@
             border-top: 1px solid var(--border-color);
         }
         footer span { color: #ffffff; font-weight: 600; }
-
-        @media (max-width: 600px) {
-            .box { padding: 25px 20px; }
-            h1 { font-size: 1.8rem; }
-        }
     </style>
 </head>
 <body>
@@ -188,36 +132,15 @@
     </nav>
 
     <div class="container">
+        <h1>Välkommen till Studieportalen</h1>
+        <p class="page-subtitle">Här hittar du begrepp och övningar för vård och omsorg vecka 15.</p>
+
         <div class="box">
-            <h1>Vård och Omsorg</h1>
-            <p class="subtitle">En resurssida för undersköterska-studenter. Välj ett ämne för att börja plugga!</p>
-
-            <a href="Begreppslista-v15.html" class="menu-link link-green">
-                <span>📖</span> Begreppslista Vecka 15
-            </a>
-
-            <a href="helhetsperspektiv.html" class="menu-link link-red">
-                <span>🎯</span> Ett helhetsperspektiv
-            </a>
-
-            <div class="feedback-section">
-                <h2>Hjälp mig att bli bättre! 🚀</h2>
-                <p>Har du hittat ett fel eller har du förslag på nya lektioner? Skriv till mig här.</p>
-                
-                <form action="https://formspree.io/f/xqegybzg" method="POST">
-                    <label>Vad gäller det?</label>
-                    <select name="typ_av_feedback">
-                        <option value="Förslag på ny lektion">Förslag på ny lektion</option>
-                        <option value="Innehållsfel">Innehållsfel</option>
-                        <option value="Tekniskt fel / Ljud">Tekniskt fel / Ljud</option>
-                        <option value="Annat">Annat</option>
-                    </select>
-
-                    <label>Ditt meddelande:</label>
-                    <textarea name="meddelande" rows="4" placeholder="Skriv här..." required></textarea>
-                    
-                    <button type="submit" class="btn-submit">Skicka meddelande</button>
-                </form>
+            <h2 class="section-title"><span>📚</span> Studiematerial</h2>
+            <p>Välj ett område nedan för att börja studera eller testa dina kunskaper.</p>
+            <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+                <a href="Begreppslista-v15.html" class="btn">📖 Studera Begrepp</a>
+                <a href="helhetsperspektiv.html" class="btn">🎯 Gör Quiz</a>
             </div>
         </div>
     </div>

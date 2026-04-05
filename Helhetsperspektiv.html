@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helhetsperspektiv - Sammanfattning</title>
+    <title>Studieportal - Helhetsperspektiv</title>
     <style>
         :root {
             --bg-color: #f0f4f8;
@@ -13,7 +13,9 @@
             --border-color: #e2e8f0;
             --nav-bg: #2d3748;
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --font-family: 'Segoe UI', Roboto, sans-serif;
         }
+
         [data-theme="dark"] {
             --bg-color: #1a202c;
             --text-color: #f7fafc;
@@ -21,26 +23,42 @@
             --border-color: #4a5568;
             --nav-bg: #11141a;
         }
+
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-color);
-            margin: 0; padding: 0; line-height: 1.6; transition: background-color 0.3s, color 0.3s;
+            font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color);
+            margin: 0; padding: 0; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
         }
-        nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; }
+        nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); color: #ffffff; }
         nav .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; }
         .nav-links { display: flex; height: 100%; align-items: center; }
-        nav a { color: #a0aec0; text-decoration: none; font-weight: 600; padding: 0 15px; height: 100%; display: flex; align-items: center; }
+        nav a { color: #a0aec0; text-decoration: none; font-weight: 600; padding: 0 15px; height: 100%; display: flex; align-items: center; font-size: 0.95rem; }
         nav a:hover, nav a.active { color: #ffffff; }
         nav a.active { border-bottom: 4px solid var(--primary-color); background-color: rgba(255,255,255,0.05); }
-        .dark-mode-btn { background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; padding: 8px 15px; border-radius: 20px; cursor: pointer; }
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px 50px 20px; }
-        .box { background-color: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: var(--shadow-md); }
-        .section-title { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; color: var(--primary-color); }
+
+        .dark-mode-btn {
+            background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff;
+            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;
+        }
+
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px 50px 20px; flex: 1; }
+        .title { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 20px; font-weight: 700; text-align: center;}
+        .card { background-color: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); margin-bottom: 25px; }
+
+        h2 { color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 5px; margin-bottom: 15px; }
+        
+        .rating-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; margin: 10px 0 20px 0; }
+        .rating-stars input { display: none; }
+        .rating-stars label { font-size: 2rem; color: #cbd5e1; cursor: pointer; }
+        .rating-stars input:checked ~ label, .rating-stars label:hover, .rating-stars label:hover ~ label { color: #f6ad55; }
+        
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
-        .highlight { font-weight: bold; color: var(--primary-color); }
+        .bold-text { font-weight: 700; color: var(--primary-color); }
     </style>
 </head>
 <body>
+
     <nav>
         <div class="nav-container">
             <div class="nav-links">
@@ -53,50 +71,53 @@
     </nav>
 
     <div class="container">
-        <h1 style="text-align:center; color:var(--primary-color);">Lärdomar - Ett helhetsperspektiv</h1>
+        <h1 class="title">Ett helhetsperspektiv</h1>
         
-        <div class="box">
-            <h2 class="section-title">Demokratisk värdegrund & Likvärdighet</h2>
+        <div class="card">
+            <h2>📖 Lärdomar</h2>
             <p>Här ryms alla viktiga insikter och sammanfattningar från kapitlet om funktionshinder och människors villkor:</p>
             <ul>
-                <li><span class="highlight">Demokratisk värdegrund:</span> Handlar om att alla människor är fria, har lika värde, rätt till integritet و rätten att vara sig själv.</li>
-                <li><span class="highlight">Likvärdighet:</span> Betyder inte att det ska vara lika för alla, utan att resultatet ska bli lika bra (t.ex. tillgång till vård av hög kvalitet).</li>
-                <li><span class="highlight">Kompensatoriskt förhållningssätt:</span> Som undersköterska ska man se till att alla får möjligheter till lika goda upplevelser trots sina nedsättningar.</li>
+                <li><span class="bold-text">Demokratisk värdegrund:</span> Handlar om att alla människor är fria, har lika värde, rätt till integritet och att vara sig själva.</li>
+                <li><span class="bold-text">Likvärdighet:</span> Betyder att något ska vara lika bra för alla (t.ex. tillgång till vård av hög kvalitet), men det innebär inte nödvändigtvis att insatsen måste se exakt likadan ut för alla.</li>
+                <li><span class="bold-text">Tillgänglighet:</span> Samhället måste se till att miljöer är förberedda och tillgängliga för att jämna ut förutsättningarna för människor med olika förmågor.</li>
+                <li><span class="bold-text">Delaktighet:</span> Består av sex dimensioner: Tillgänglighet, Tillhörighet, Engagemang, Samhandling, Autonomi och Erkännande.</li>
+                <li><span class="bold-text">Synsätt genom tiderna:</span> Samhället har rört sig från ett synsätt där funktionshinder sågs som ett individproblem (medicinskt/biologiskt) till ett modernt synsätt där miljön har ansvaret att anpassa sig efter människan.</li>
             </ul>
         </div>
 
-        <div class="box">
-            <h2 class="section-title">Delaktighetens 6 områden</h2>
-            <p>För att en person ska känna sig helt delaktig enligt modellen krävs:</p>
-            <ol>
-                <li><span class="highlight">Tillgänglighet:</span> Möjlighet att vara med i alla miljöer.</li>
-                <li><span class="highlight">Tillhörighet:</span> Att känna sig trygg och inkluderad.</li>
-                <li><span class="highlight">Engagemang:</span> Att ha en vilja och ett intresse av att delta.</li>
-                <li><span class="highlight">Samhandling:</span> Att få delta och bidra i gemensamma aktiviteter.</li>
-                <li><span class="highlight">Autonomi:</span> Rätten till självbestämmande.</li>
-                <li><span class="highlight">Erkännande:</span> Att bli accepterad och lyssnad på av alla.</li>
-            </ol>
-        </div>
-
-        <div class="box">
-            <h2 class="section-title">Historisk tillbakablick & Lagar</h2>
-            <p>Synen på funktionsnedsättningar har förändrats enormt genom tiderna:</p>
-            <ul>
-                <li>Fram till <span class="highlight">1974</span> fanns lagar om tvångssterilisering i Sverige.</li>
-                <li>Under <span class="highlight">1960-talet</span> kom omsorgslagen som stängde stora institutioner så att personer fick flytta ut i samhället.</li>
-                <li>Idag styrs arbetet av lagar som <span class="highlight">SoL</span> (Socialtjänstlagen), <span class="highlight">LSS</span> (Lagen om stöd och service till vissa funktionshindrade) och <span class="highlight">Diskrimineringslagen</span>.</li>
-            </ul>
+        <div class="card">
+            <h2>Tyck till och ge förslag! 💬</h2>
+            <form id="suggestion-form" style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Betygsätt innehållet: *</label>
+                    <div class="rating-stars">
+                        <input type="radio" name="star" id="star5" value="5"><label for="star5">★</label>
+                        <input type="radio" name="star" id="star4" value="4"><label for="star4">★</label>
+                        <input type="radio" name="star" id="star3" value="3"><label for="star3">★</label>
+                        <input type="radio" name="star" id="star2" value="2"><label for="star2">★</label>
+                        <input type="radio" name="star" id="star1" value="1"><label for="star1">★</label>
+                    </div>
+                </div>
+                <textarea rows="4" placeholder="Skriv din feedback här..." required style="padding:12px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color); resize: vertical;"></textarea>
+                <button type="submit" style="align-self:flex-start; background:var(--primary-color); color:white; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; font-weight: 700;">Skicka</button>
+            </form>
+            <div id="form-feedback" style="display:none; margin-top:15px; color:#2f855a; text-align:center; font-weight: 700; background-color: rgba(104, 211, 145, 0.2); padding: 15px; border-radius: 8px;">Tack! Vi har tagit emot ditt svar. 🎉</div>
         </div>
     </div>
 
     <script>
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const targetTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', targetTheme);
             localStorage.setItem('theme', targetTheme);
         }
         if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+
+        document.getElementById('suggestion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('suggestion-form').style.display = 'none';
+            document.getElementById('form-feedback').style.display = 'block';
+        });
     </script>
 </body>
 </html>

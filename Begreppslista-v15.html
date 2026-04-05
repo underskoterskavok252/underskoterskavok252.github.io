@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Begreppslista v.15 - Med Ljud för Alla Delar</title>
+    <title>Begreppslista v.15 - Med Ljud & Footer</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -65,6 +65,17 @@
         .option-btn.wrong { background-color: #fed7d7 !important; color: #822727 !important; }
         
         .timer-bar { height: 6px; background-color: #e06c75; width: 100%; border-radius: 3px; transition: width 1s linear; margin-bottom: 15px; }
+
+        /* استایل فوتر */
+        footer {
+            background-color: var(--nav-bg);
+            color: #a0aec0;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -138,8 +149,11 @@
         </div>
     </div>
 
+    <footer>
+        © 2026 - Mohsen Naderi
+    </footer>
+
     <script>
-        // دیتابیس ۱۹ تایی از فایل ارسالی شما
         const termsData = [
             { term: "Demokratisk värdegrund", sv: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
             { term: "Lika värde", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
@@ -172,20 +186,19 @@
         let timerInterval;
         let timeLeft = 15;
 
-        // تابع خواندن متن با صدای سوئدی
+        // تابع پخش صدا
         function speakSwedish(text) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // لغو صحبت‌های قبلی
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'sv-SE';
-                utterance.rate = 0.85; // سرعت ملایم‌تر
+                utterance.rate = 0.85;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
         window.onload = function() { populateTermsList(); }
 
-        // ایجاد لیست مطالعه
         function populateTermsList() {
             const listDiv = document.getElementById('terms-list');
             listDiv.innerHTML = "";
@@ -227,23 +240,13 @@
                 document.getElementById('card-back-swedish').innerText = activeCards[currentCardIndex].sv;
                 document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${activeCards.length} (Kvar: ${activeCards.length + failedCards.length})`;
                 
-                // فقط اصطلاح اول به صورت خودکار خوانده شود
                 speakSwedish(currentTerm);
             }, 150);
         }
 
-        // توابع کمکی پخش صدا برای جلو و پشت کارت
-        function speakCurrentTerm() {
-            speakSwedish(activeCards[currentCardIndex].term);
-        }
-
-        function speakCurrentDef() {
-            speakSwedish(activeCards[currentCardIndex].sv);
-        }
-
-        function flipCard() { 
-            document.querySelector('.flashcard').classList.toggle('flipped'); 
-        }
+        function speakCurrentTerm() { speakSwedish(activeCards[currentCardIndex].term); }
+        function speakCurrentDef() { speakSwedish(activeCards[currentCardIndex].sv); }
+        function flipCard() { document.querySelector('.flashcard').classList.toggle('flipped'); }
 
         function markCard(known) {
             if (!known) failedCards.push(activeCards[currentCardIndex]);
@@ -266,7 +269,6 @@
             }
         }
 
-        // بخش کوئیز
         function startQuiz() { 
             document.getElementById('study-section').style.display = 'none'; 
             document.getElementById('quiz-section').style.display = 'block'; 
@@ -293,7 +295,6 @@
             const current = quizQuestions[currentQuizIndex];
             document.getElementById('question-text').innerText = `(${currentQuizIndex + 1}/19) Vad betyder "${current.term}"?`;
             
-            // پخش صدای کلمه سوال در کوئیز
             speakSwedish(current.term);
 
             const optionsDiv = document.getElementById('options');

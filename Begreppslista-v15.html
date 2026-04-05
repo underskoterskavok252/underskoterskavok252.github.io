@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Begreppslista v.15 - Premium</title>
+    <title>Begreppslista v.15 - Fullständig</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -64,7 +64,6 @@
         .option-btn.correct { background-color: #c6f6d5 !important; color: #22543d !important; }
         .option-btn.wrong { background-color: #fed7d7 !important; color: #822727 !important; }
         
-        /* تایمر جدید برای کوئیز */
         .timer-bar { height: 6px; background-color: #e06c75; width: 100%; border-radius: 3px; transition: width 1s linear; margin-bottom: 15px; }
 
         .rating-stars input:checked ~ label,
@@ -88,7 +87,7 @@
         <h1 style="text-align:center; color:var(--primary-color);">Begreppslista vecka 15</h1>
         
         <div id="study-section" class="box">
-            <h2 class="section-title">📖 Studera begrepp</h2>
+            <h2 class="section-title">📖 Studera begrepp (19 st)</h2>
             <div id="terms-list"></div>
             <div style="text-align: center; margin-top: 20px;">
                 <button class="btn" onclick="startFlashcards()">Öva med Flashcards 🗂️</button>
@@ -106,7 +105,7 @@
                             <h2 style="color: var(--primary-color); font-size: 2.2rem;" id="card-front-text">Begrepp</h2>
                         </div>
                         <div class="flashcard-back" onclick="flipCard()">
-                            <p id="card-back-swedish" style="font-size: 1.4rem; line-height: 1.6;">Svensk förklaring</p>
+                            <p id="card-back-swedish" style="font-size: 1.2rem; line-height: 1.6;">Svensk förklaring</p>
                         </div>
                     </div>
                 </div>
@@ -117,13 +116,13 @@
                     <button class="btn" style="background-color:#48bb78;" onclick="markCard(true)">Kunde det! ✔️</button>
                 </div>
                 <span id="card-counter" style="font-weight: 600;">1 / 19</span>
-                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Avbryt och till listan</button>
+                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Avbryt och till listان</button>
             </div>
         </div>
 
         <div id="quiz-section" class="box" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h2 class="section-title">🎯 Begreppsquiz</h2>
+                <h2 class="section-title">🎯 Begreppsquiz (19 frågor)</h2>
                 <div style="font-weight:700;">Poäng: <span id="current-score">0</span></div>
             </div>
             <div class="timer-bar" id="timer"></div>
@@ -155,10 +154,27 @@
     </div>
 
     <script>
+        // دیتابیس ۱۹ تایی بر اساس فایل ورد شما
         const termsData = [
             { term: "Demokratisk värdegrund", sv: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
-            { term: "Lika värde", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs." },
-            { term: "Inkludering", sv: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning." }
+            { term: "Lika värde", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
+            { term: "Likvärdighet", sv: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård." },
+            { term: "Inkludering", sv: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning, ålder eller bakgrund." },
+            { term: "Tillgänglighet", sv: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika och har olika behov. Alla ska känna sig välkomna och vara en del i sammanhanget." },
+            { term: "Levnadsvillkor", sv: "Levnadsvillkor handlar om hur en person lever och vilka möjligheter personen har till ett bra och tryggt liv." },
+            { term: "Delaktighet", sv: "Betyder att få vara med, påverka och känna att man är viktig i sitt eget liv." },
+            { term: "Delaktighetsmodellen", sv: "Är ett arbetssätt för att stärka inflytande och självbestämmande för personer i behov av stöd. Modellen bygger på 6 olika delar." },
+            { term: "Livskvalitet", sv: "Handlar om brukarens hälsa och välmående. Att känna sig välkommen, behövd och ha en meningsfull fritid." },
+            { term: "Normer", sv: "Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara." },
+            { term: "Värderingar", sv: "Att man får tycka och tänka som man vill och det styr vad vi gör och vad vi säger." },
+            { term: "Funktionsförmåga", sv: "Beskriver hur en person fungerar fysiskt, psykiskt, kognitivt och socialt." },
+            { term: "Fysisk funktionsförmåga", sv: "Nedsatt rörelseförmåga, nedsatt syn, nedsatt hörsel. Man kan födas med det eller få det senare i livet." },
+            { term: "Psykisk funktionsförmåga", sv: "Trauma, sexuellt övergrepp, krig, livssituation." },
+            { term: "Kognitiv funktionsförmåga", sv: "Svårt med inlärning, minne, svårt att ta in information eller förmedla information, bli störd av olika ljud." },
+            { term: "Social funktionsförmåga", sv: "Svårigheter med att skapa och bibehålla relationer." },
+            { term: "Funktionsnedsättning", sv: "Betyder att en funktion är nedsatt och fungerar på ett annorunda sätt eller inte alls." },
+            { term: "Funktionshinder", sv: "Uppstår när omgivningen gör det svårt för en person med funktionsnedsättning att vara delaktig på lika villkor." },
+            { term: "Självbestämmande", sv: "Betyder att en person får vara med och bestämma över sitt eget liv." }
         ];
 
         let activeCards = [...termsData];
@@ -224,7 +240,7 @@
                     updateFlashcard();
                 } else {
                     confetti();
-                    alert("Bra jobbat! Du har klarat alla kort!");
+                    alert("Bra jobbat! Du har klarat alla 19 kort!");
                     showStudy();
                 }
             } else {
@@ -236,7 +252,8 @@
             document.getElementById('study-section').style.display = 'none'; 
             document.getElementById('quiz-section').style.display = 'block'; 
             currentQuizIndex = 0; score = 0; 
-            quizQuestions = [...termsData].sort(() => Math.random() - 0.5).slice(0, 10); 
+            // در اینجا تمام ۱۹ سوال لود می‌شوند
+            quizQuestions = [...termsData].sort(() => Math.random() - 0.5); 
             document.getElementById('current-score').innerText = score;
             generateQuizQuestion(); 
         }
@@ -256,7 +273,7 @@
             }, 1000);
 
             const current = quizQuestions[currentQuizIndex];
-            document.getElementById('question-text').innerText = `Vad betyder "${current.term}"?`;
+            document.getElementById('question-text').innerText = `(${currentQuizIndex + 1}/19) Vad betyder "${current.term}"?`;
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = ""; document.getElementById('feedback').innerText = ""; document.getElementById('next-btn').style.display = "none";
 
@@ -285,7 +302,7 @@
                 selectedBtn.classList.add('correct'); 
                 score++; 
                 document.getElementById('current-score').innerText = score;
-                new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==').play(); // صدای کوچک
+                new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==').play(); // صدای کوتاه درست بودن
             } else { 
                 if (selectedBtn) selectedBtn.classList.add('wrong'); 
                 buttons.forEach(btn => { if (btn.innerText === quizQuestions[currentQuizIndex].sv) btn.classList.add('correct'); }); 
@@ -300,6 +317,7 @@
                 let high = localStorage.getItem('quizHighScore') || 0;
                 if (score > high) localStorage.setItem('quizHighScore', score);
                 document.getElementById('quiz-content').innerHTML = `<h3>Klar! Din poäng: ${score} / ${quizQuestions.length}</h3><button class="btn" onclick="startQuiz()">Gör om</button>`; 
+                if(score === 19) confetti();
             }
         }
 

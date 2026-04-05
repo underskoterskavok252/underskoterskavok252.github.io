@@ -46,7 +46,6 @@
         .box { background-color: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: var(--shadow-md); }
         .section-title { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
         
-        /* 🔥 ابعاد فلش کارت‌ها قفل شده روی سایز عریض ۹۰۰ پیکسل 🔥 */
         .flashcard-area { display: flex; justify-content: center; margin: 30px 0; width: 100%; }
         .flashcard { width: 900px !important; height: 380px; perspective: 1000px; cursor: pointer; }
         .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
@@ -71,6 +70,12 @@
         .speaker-btn { background: #e2e8f0; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; margin-top: 15px; }
         .speaker-btn:hover { background: #cbd5e1; }
         [data-theme="dark"] .speaker-btn { background: #4a5568; color: white; }
+
+        .rating-stars input:checked ~ label,
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #f6ad55 !important;
+        }
     </style>
 </head>
 <body>
@@ -119,7 +124,7 @@
                     <span id="card-counter" style="margin: 0 15px; font-weight: 600;">1 / 19</span>
                     <button class="btn" onclick="nextCard()">Nästa ➡️</button>
                 </div>
-                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Tillbaka till listان</button>
+                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Tillbaka till listan</button>
             </div>
         </div>
 
@@ -132,13 +137,57 @@
                 <button id="next-btn" class="btn" style="display:none; margin: 15px auto 0 auto;" onclick="nextQuestion()">Nästa fråga ➡️</button>
             </div>
         </div>
+
+        <div class="box" style="margin-top: 30px;">
+            <h2 class="section-title">Tyck till och ge förslag! 💬</h2>
+            <p style="color: #718096;">Vad tycker du om våra Flashcards och Begreppsquiz? Ge betyg och förslag!</p>
+            
+            <form id="quiz-suggestion-form" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Hur bra var övningarna? *</label>
+                    <div class="rating-stars" style="display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; margin: 5px 0 15px 0;">
+                        <input type="radio" name="star-quiz" id="qstar5" value="5" style="display:none;"><label for="qstar5" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
+                        <input type="radio" name="star-quiz" id="qstar4" value="4" style="display:none;"><label for="qstar4" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
+                        <input type="radio" name="star-quiz" id="qstar3" value="3" style="display:none;"><label for="qstar3" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
+                        <input type="radio" name="star-quiz" id="qstar2" value="2" style="display:none;"><label for="qstar2" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
+                        <input type="radio" name="star-quiz" id="qstar1" value="1" style="display:none;"><label for="qstar1" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="quiz-subject" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Gäller det: *</label>
+                    <select id="quiz-subject" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-family: inherit;">
+                        <option value="" disabled selected>Välj kategori...</option>
+                        <option value="flashcards">Flashcards</option>
+                        <option value="quiz">Begreppsquiz</option>
+                        <option value="annat">Allmän feedback</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="quiz-user-name" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt namn (frivilligt):</label>
+                    <input type="text" id="quiz-user-name" placeholder="Skriv ditt namn här...">
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="quiz-user-message" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt meddelande: *</label>
+                    <textarea id="quiz-user-message" rows="4" placeholder="Skriv dina tankar här..." required style="resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn" style="align-self: flex-start; border: none;">Skicka in ✉️</button>
+            </form>
+            
+            <div id="quiz-form-feedback" style="display: none; margin-top: 15px; padding: 15px; background-color: rgba(104, 211, 145, 0.2); border: 1px solid #68d391; color: #2f855a; border-radius: 8px; font-weight: 600; text-align: center;">
+                Tack! Ditt förslag och betyg har skickats. 🎉
+            </div>
+        </div>
     </div>
 
     <script>
         const termsData = [
             { term: "Demokratisk värdegrund", sv: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
             { term: "Lika värde", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
-            { term: "Likvärdighet", sv: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård." },
+            { term: "Likvärdighet", sv: "Något ska vara lika bra för alla. Alla ska ha rätt till samma våرد." },
             { term: "Inkludering", sv: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning, ålder eller bakgrund." },
             { term: "Tillgänglighet", sv: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika och har olika behov. Alla ska känna sig välkomna." },
             { term: "Levnadsvillkor", sv: "Handlar om hur en person lever och vilka möjligheter personen har till ett bra och tryggt liv." },
@@ -154,7 +203,7 @@
             { term: "Social funktionsförmåga", sv: "Svårigheter med att skapa och bibehålla relationer." },
             { term: "Funktionsnedsättning", sv: "Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls." },
             { term: "Funktionshinder", sv: "Uppstår när omgivningen gör det svårt för en person med funktionsnedsättning att vara delaktig." },
-            { term: "Självbestämmande", sv: "Betyder att en person får vara med och bestämma över sitt eget liv." }
+            { term: "Självbestämmande", sv: "Betyder att en person får vara med och bestämما över sitt eget liv." }
         ];
 
         let currentCardIndex = 0;
@@ -245,7 +294,6 @@
         function nextQuestion() { currentQuizIndex++; if (currentQuizIndex < quizQuestions.length) generateQuizQuestion(); else showQuizResults(); }
         function showQuizResults() { document.getElementById('quiz-content').innerHTML = `<div style="text-align:center;"><h3>Quizet är klart!</h3><div style="font-size:3rem; font-weight:800; color:var(--primary-color); margin:20px 0;">${score} / ${quizQuestions.length}</div><button class="btn" onclick="startQuiz()">Gör om testet 🔄</button></div>`; }
 
-        // اسکریپت دارک مود یکپارچه
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -255,6 +303,22 @@
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
+
+        document.getElementById('quiz-suggestion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const hasStar = document.querySelector('input[name="star-quiz"]:checked');
+            if(!hasStar){
+                alert("Vänligen ge ett betyg med stjärnorna också!");
+                return;
+            }
+            document.getElementById('quiz-suggestion-form').style.display = 'none';
+            document.getElementById('quiz-form-feedback').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('quiz-suggestion-form').reset();
+                document.getElementById('quiz-suggestion-form').style.display = 'flex';
+                document.getElementById('quiz-form-feedback').style.display = 'none';
+            }, 3000);
+        });
     </script>
 </body>
 </html>

@@ -16,7 +16,7 @@
             --font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
         }
 
-        /* استایل‌های دارک مود کاملا هماهنگ */
+        /* استایل‌های دارک مود */
         [data-theme="dark"] {
             --bg-color: #1a202c;
             --text-color: #f7fafc;
@@ -34,7 +34,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* منوی بالای صفحه یکپارچه */
+        /* منوی بالای صفحه */
         nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); color: #ffffff; }
         nav .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; }
         .nav-links { display: flex; height: 100%; align-items: center; }
@@ -50,7 +50,6 @@
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px 50px 20px; flex: 1; }
         .title { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 20px; font-weight: 700; text-align: center;}
         
-        /* استایل باکس‌های محتوا */
         .card { 
             background-color: var(--card-bg); 
             padding: 30px; 
@@ -90,6 +89,41 @@
         
         summary { cursor: pointer; font-weight: 700; color: var(--primary-color); outline: none; margin-top: 10px; }
         .answer-content { background: var(--bg-color); padding: 15px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
+
+        /* 🔥 استایل‌های بخش ستاره و فرم جدید 🔥 */
+        .rating-stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 10px;
+            margin: 10px 0 20px 0;
+        }
+        .rating-stars input { display: none; }
+        .rating-stars label {
+            font-size: 2rem;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .rating-stars input:checked ~ label,
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #f6ad55;
+        }
+        
+        input, textarea, select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
     </style>
 </head>
 <body>
@@ -142,30 +176,19 @@
             <p>För att en person ska känna sig delaktig är följande sex områden avgörande:</p>
             <ul>
                 <li><strong>Tillgänglighet:</strong> Att kunna vara på plats fysiskt och känna samhörighet.</li>
-                <li><strong>Tillhörighet:</strong> Att känna sig inkluderad och trygg.</li>
+                <li><strong>Tillhörighet:</strong> Känna sig inkluderad och trygg.</li>
                 <li><strong>Engagemang:</strong> Att känna intresse och vilja (kan aldrig tvingas).</li>
-                <li><strong>Samhandling:</strong> Att få vara delaktig i det som rör en själv.</li>
+                <li><strong>Samhandling:</strong> Vara delaktig i det som rör en själv.</li>
                 <li><strong>Autonomi:</strong> Rätten till självbestämmande.</li>
-                <li><strong>Erkännande:</strong> Att bli accepterad och lyssnad på.</li>
+                <li><strong>Erkännande:</strong> Bli accepterad och lyssnad på.</li>
             </ul>
 
             <h2>Funktionsförmåga vs Funktionsnedsättning</h2>
             <ul>
                 <li><strong>Funktionsförmåga:</strong> Beskriver hur en person fungerar (fysiskt, psykiskt, kognitivt eller socialt).</li>
                 <li><strong>Funktionsnedsättning:</strong> Innebär att en specifik funktion är nedsatt och fungerar annorlunda eller inte alls.</li>
-                <li><strong>Funktionshinder:</strong> Ett hinder som uppstår i miljön runt personen när miljön inte är anpassad (t.ex. en trappa utan ramp för en rullstolsburen).</li>
+                <li><strong>Funktionshinder:</strong> Ett hinder som uppstår i miljön runt personen när miljön inte är anpassad (t.ex. en trappa utan ramp).</li>
             </ul>
-
-            <h2>Historisk tillbakablick och lagar</h2>
-            <p>Synen på personer med funktionsnedsättning har gått från att ses som ett "straff" eller problem hos individen till att handla om hur samhället och miljön skapar hinder eller möjligheter.</p>
-            <div class="highlight">
-                <strong>Viktiga lagar idag:</strong>
-                <ul>
-                    <li>Socialtjänstlagen (SoL)</li>
-                    <li>Lagen om stöd och service för vissa funktionshindrade (LSS) med ledorden: Självbestämmande, Delaktighet och Likvärdighet.</li>
-                    <li>Diskrimineringslagen</li>
-                </ul>
-            </div>
         </div>
 
         <div class="card">
@@ -175,13 +198,12 @@
             <div class="exercise-box exercise-orange">
                 <h3>1. Begreppskunskap: Matcha rätt begrepp</h3>
                 <p>Vilket begrepp passar bäst in på följande beskrivningar? 
-                   <br><em>(Ledtrådar: Funktionsförmåga, Funktionsnedsättning, Funktionshinder, Normer, Kompensatoriskt förhållningssätt)</em></p>
+                   <br><em>(Ledtrådar: Funktionsförmåga, Funktionsnedsättning, Funktionshinder, Normer)</em></p>
                 
                 <ul style="padding-left: 20px;">
                     <li><strong>A)</strong> Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara.</li>
                     <li><strong>B)</strong> Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls.</li>
-                    <li><strong>C)</strong> Att en undersköterska ser till så att alla får möjligheter till lika goda upplevelser och en positiv utveckling, oavsett förutsättningar.</li>
-                    <li><strong>D)</strong> Ett hinder som uppstår i miljön när den inte är anpassad.</li>
+                    <li><strong>C)</strong> Ett hinder som uppstår i miljön när den inte är anpassad.</li>
                 </ul>
                 
                 <details>
@@ -189,8 +211,7 @@
                     <div class="answer-content">
                         <p><strong>A:</strong> Normer<br>
                            <strong>B:</strong> Funktionsnedsättning<br>
-                           <strong>C:</strong> Kompensatoriskt förhållningssätt<br>
-                           <strong>D:</strong> Funktionshinder</p>
+                           <strong>C:</strong> Funktionshinder</p>
                     </div>
                 </details>
             </div>
@@ -213,38 +234,88 @@
                     </div>
                 </details>
             </div>
+        </div>
 
-            <div class="exercise-box exercise-gray">
-                <h3>3. Sant eller Falskt?</h3>
-                <ul style="padding-left: 20px;">
-                    <li><strong>1.</strong> Likvärdighet betyder att stödet ska utformas på exakt samma sätt för alla.</li>
-                    <li><strong>2.</strong> Lagen om tvångssterilisering togs bort år 1974.</li>
-                </ul>
-
-                <details>
-                    <summary>Klicka här för att se rätt svar ⬇️</summary>
-                    <div class="answer-content">
-                        <p><strong>1. Falskt:</strong> Likvärdighet betyder att vården ska hålla lika hög kvalitet, men stödet måste individanpassas.<br>
-                           <strong>2. Sant:</strong> Den fanns fram till 1974 och ses idag som ett brott mot mänskliga rättigheter.</p>
+        <div class="card">
+            <h2>Tyck till och ge förslag! 💬</h2>
+            <p style="color: #718096;">Betygsätt innehållet och skicka dina tankar eller förslag till oss. Vi läser allt!</p>
+            
+            <form id="suggestion-form" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                
+                <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 600; font-size: 0.95rem;">Hur användbart var detta innehåll? *</label>
+                    <div class="rating-stars">
+                        <input type="radio" name="star" id="star5" value="5"><label for="star5">★</label>
+                        <input type="radio" name="star" id="star4" value="4"><label for="star4">★</label>
+                        <input type="radio" name="star" id="star3" value="3"><label for="star3">★</label>
+                        <input type="radio" name="star" id="star2" value="2"><label for="star2">★</label>
+                        <input type="radio" name="star" id="star1" value="1"><label for="star1">★</label>
                     </div>
-                </details>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="subject" style="font-weight: 600; font-size: 0.95rem;">Ämne: *</label>
+                    <select id="subject" required>
+                        <option value="" disabled selected>Välj ämne...</option>
+                        <option value="förslag">Jag har ett förslag / idé</option>
+                        <option value="fel">Jag vill rapportera ett fel</option>
+                        <option value="beröm">Jag vill bara tacka!</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="user-name" style="font-weight: 600; font-size: 0.95rem;">Ditt namn (frivilligt):</label>
+                    <input type="text" id="user-name" placeholder="Skriv ditt namn här...">
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="user-message" style="font-weight: 600; font-size: 0.95rem;">Ditt meddelande: *</label>
+                    <textarea id="user-message" rows="5" placeholder="Skriv dina tankar här..." required style="resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" style="display: inline-block; background-color: var(--primary-color); color: white; border: none; padding: 14px 30px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; align-self: flex-start; box-shadow: 0 4px 6px rgba(224, 108, 117, 0.2);">Skicka in ✉️</button>
+            </form>
+            
+            <div id="form-feedback" style="display: none; margin-top: 15px; padding: 15px; background-color: rgba(104, 211, 145, 0.2); border: 1px solid #68d391; color: #2f855a; border-radius: 8px; font-weight: 600; text-align: center;">
+                Tack! Ditt förslag och betyg har skickats. 🎉
             </div>
         </div>
+
     </div>
 
     <script>
-        // اسکریپت دارک مود یکپارچه با حافظه مرورگر
+        // اسکریپت دارک مود
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', targetTheme);
             localStorage.setItem('theme', targetTheme);
         }
-        
-        // چک کردن تم ذخیره شده به هنگام بارگذاری صفحه
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
+
+        // اسکریپت فرم ارسال نظر
+        document.getElementById('suggestion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // چک کردن اینکه آیا ستاره ای انتخاب شده است یا خیر
+            const hasStar = document.querySelector('input[name="star"]:checked');
+            if(!hasStar){
+                alert("Vänligen ge ett betyg med stjärnorna också!");
+                return;
+            }
+            
+            document.getElementById('suggestion-form').style.display = 'none';
+            document.getElementById('form-feedback').style.display = 'block';
+            
+            // بازگرداندن فرم به حالت اول پس از ۳ ثانیه
+            setTimeout(() => {
+                document.getElementById('suggestion-form').reset();
+                document.getElementById('suggestion-form').style.display = 'flex';
+                document.getElementById('form-feedback').style.display = 'none';
+            }, 3000);
+        });
     </script>
 </body>
 </html>

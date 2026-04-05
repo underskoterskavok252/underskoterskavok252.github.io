@@ -13,7 +13,7 @@
             --border-color: #e2e8f0;
             --nav-bg: #2d3748;
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            --font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         [data-theme="dark"] {
@@ -25,14 +25,10 @@
         }
 
         body {
-            font-family: var(--font-family); 
-            background-color: var(--bg-color); 
-            color: var(--text-color);
-            margin: 0; padding: 0; line-height: 1.6; 
-            display: flex; flex-direction: column; min-height: 100vh;
+            font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color);
+            margin: 0; padding: 0; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
-
         nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); color: #ffffff; }
         nav .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; }
         .nav-links { display: flex; height: 100%; align-items: center; }
@@ -47,79 +43,14 @@
 
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px 50px 20px; flex: 1; }
         .title { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 20px; font-weight: 700; text-align: center;}
-        
-        .card { 
-            background-color: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 16px; 
-            border: 1px solid var(--border-color); 
-            box-shadow: var(--shadow-md); 
-            margin-top: 25px;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
+        .card { background-color: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); margin-top: 25px; }
 
         h2 { color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 30px; }
-        h3 { color: #4299e1; margin-top: 20px; }
-        [data-theme="dark"] h3 { color: #63b3ed; }
-
-        ul { padding-left: 25px; }
-        li { margin-bottom: 8px; }
         
-        .highlight {
-            background-color: rgba(66, 153, 225, 0.1);
-            padding: 15px;
-            border-left: 4px solid #4299e1;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-
-        .grid-container { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px; }
-        .grid-item { flex: 1 1 calc(50% - 20px); background: rgba(0, 0, 0, 0.02); padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; }
-        [data-theme="dark"] .grid-item { background: rgba(255, 255, 255, 0.02); }
-        
-        @media (max-width: 600px) { .grid-item { flex: 1 1 100%; } }
-
-        .exercise-box { padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid; }
-        .exercise-orange { background-color: rgba(246, 173, 85, 0.1); border-color: #f6ad55; }
-        .exercise-green { background-color: rgba(104, 211, 145, 0.1); border-color: #68d391; }
-        .exercise-gray { background-color: rgba(160, 174, 192, 0.1); border-color: #a0aec0; }
-        
-        summary { cursor: pointer; font-weight: 700; color: var(--primary-color); outline: none; margin-top: 10px; }
-        .answer-content { background: var(--bg-color); padding: 15px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
-
-        .rating-stars {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-            gap: 10px;
-            margin: 10px 0 20px 0;
-        }
+        .rating-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; margin: 10px 0 20px 0; }
         .rating-stars input { display: none; }
-        .rating-stars label {
-            font-size: 2rem;
-            color: #cbd5e1;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .rating-stars input:checked ~ label,
-        .rating-stars label:hover,
-        .rating-stars label:hover ~ label {
-            color: #f6ad55;
-        }
-        
-        input, textarea, select {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #4299e1;
-        }
+        .rating-stars label { font-size: 2rem; color: #cbd5e1; cursor: pointer; }
+        .rating-stars input:checked ~ label, .rating-stars label:hover, .rating-stars label:hover ~ label { color: #f6ad55; }
     </style>
 </head>
 <body>
@@ -136,110 +67,18 @@
     </nav>
 
     <div class="container">
-        <h1 class="title">Ett helhetsperspektiv på funktionsförmåga och funktionsnedsättning</h1>
+        <h1 class="title">Ett helhetsperspektiv</h1>
         
         <div class="card">
-            <h2>Nivå 1: Demokratisk värdegrund</h2>
-            <p>En demokratisk värdegrund handlar om att alla människor är fria, har lika värde, att samhället ska vara jämställt samt rätten till personlig integritet och att få vara sig själv.</p>
-            <div class="highlight">
-                <strong>I yrket som undersköterska ska vi:</strong>
-                <ul>
-                    <li>Möta alla med respekt.</li>
-                    <li>Ta hänsyn till individens integritet.</li>
-                </ul>
-            </div>
-
-            <h2>Likvärdighet</h2>
-            <p>Likvärdighet betyder att något ska vara lika bra för alla, till exempel att alla ska ha tillgång till vård och omsorg av lika hög kvalitet. Det betyder dock inte att stödet ska vara exakt likadant utformat för alla.</p>
-            <p>Som undersköterska innebär detta ett <strong>kompensatoriskt förhållningssätt</strong> för att ge alla samma möjligheter till en positiv utveckling.</p>
-
-            <h2>Inkludering och Tillgänglighet</h2>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h3>Inkludering</h3>
-                    <ul>
-                        <li><strong>Fysisk inkludering:</strong> Att kunna vara med fysiskt i olika sammanhang.</li>
-                        <li><strong>Social inkludering:</strong> Att ingå i en gemenskap, bli accepterad och känna tillhörighet.</li>
-                    </ul>
-                </div>
-                <div class="grid-item">
-                    <h3>Tillgänglighet</h3>
-                    <p>Att miljöer är förberedda för människors olikheter (t.ex. kollektivtrafik, ramper i byggnader) så att alla kan vara fullt delaktiga i samhället. Detta är även reglerat i diskrimineringslagen.</p>
-                </div>
-            </div>
-
-            <h2>Delaktighet (Delaktighetsmodellen)</h2>
-            <p>För att en person ska känna sig delaktig är följande sex områden avgörande:</p>
-            <ul>
-                <li><strong>Tillgänglighet:</strong> Att kunna vara på plats fysiskt och känna samhörighet.</li>
-                <li><strong>Tillhörighet:</strong> Att känna sig inkluderad och trygg.</li>
-                <li><strong>Engagemang:</strong> Att känna intresse och vilja.</li>
-                <li><strong>Samhandling:</strong> Att få vara delaktig i det som rör en själv.</li>
-                <li><strong>Autonomi:</strong> Rätten till självbestämmande.</li>
-                <li><strong>Erkännande:</strong> Att bli accepterad och lyssnad på.</li>
-            </ul>
-
-            <h2>Funktionsförmåga vs Funktionsnedsättning</h2>
-            <ul>
-                <li><strong>Funktionsförmåga:</strong> Beskriver hur en person fungerar (fysiskt, psykiskt, kognitivt eller socialt).</li>
-                <li><strong>Funktionsnedsättning:</strong> Innebär att en specifik funktion är nedsatt och fungerar annorlunda eller inte alls.</li>
-                <li><strong>Funktionshinder:</strong> Ett hinder som uppstår i miljön runt personen när miljön inte är anpassad (t.ex. en trappa utan ramp).</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Övning och Begreppstest</h2>
-            <p style="color: #718096;">Testa dina kunskaper om kapitlets viktigaste begrepp. Försök att svara själv först innan du klickar på "Visa svar".</p>
-
-            <div class="exercise-box exercise-orange">
-                <h3>1. Begreppskunskap: Matcha rätt begrepp</h3>
-                <p>Vilket begrepp passar bäst in på följande beskrivningar? 
-                   <br><em>(Ledtrådar: Funktionsförmåga, Funktionsnedsättning, Funktionshinder, Normer)</em></p>
-                
-                <ul style="padding-left: 20px;">
-                    <li><strong>A)</strong> Förväntningar, tankar och oskrivna regler om hur någonting är eller ska vara.</li>
-                    <li><strong>B)</strong> Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls.</li>
-                    <li><strong>C)</strong> Ett hinder som uppstår i miljön när den inte är anpassad.</li>
-                </ul>
-                
-                <details>
-                    <summary>Klicka här för att se rätt svar ⬇️</summary>
-                    <div class="answer-content">
-                        <p><strong>A:</strong> Normer<br>
-                           <strong>B:</strong> Funktionsnedsättning<br>
-                           <strong>C:</strong> Funktionshinder</p>
-                    </div>
-                </details>
-            </div>
-
-            <div class="exercise-box exercise-green">
-                <h3>2. De sex områdena i Delaktighetsmodellen</h3>
-                <p>Kan du nämna de sex områden som krävs för att en person ska känna delaktighet enligt presentationen?</p>
-                
-                <details>
-                    <summary>Klicka här för att se rätt svar ⬇️</summary>
-                    <div class="answer-content">
-                        <ol>
-                            <li><strong>Tillgänglighet:</strong> Kunna vara på plats fysiskt och känna samhörighet.</li>
-                            <li><strong>Tillhörighet:</strong> Känna sig inkluderad och trygg.</li>
-                            <li><strong>Engagemang:</strong> Intresse, lust och vilja.</li>
-                            <li><strong>Samhandling:</strong> Vara delaktig i områden som rör personen själv.</li>
-                            <li><strong>Autonomi:</strong> Rätten till självbestämmande.</li>
-                            <li><strong>Erkännande:</strong> Bli accepterad och lyssnاد på.</li>
-                        </ol>
-                    </div>
-                </details>
-            </div>
+            <h2>Lärdomar</h2>
+            <p>Här ryms alla viktiga insikter och sammanfattningar från kapitlet om funktionshinder och människors villkor.</p>
         </div>
 
         <div class="card">
             <h2>Tyck till och ge förslag! 💬</h2>
-            <p style="color: #718096;">Betygsätt innehållet och skicka dina tankar eller förslag till oss. Vi läser allt!</p>
-            
-            <form id="suggestion-form" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-                
-                <div style="display: flex; flex-direction: column;">
-                    <label style="font-weight: 600; font-size: 0.95rem;">Hur användbart var detta innehåll? *</label>
+            <form id="suggestion-form" style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Betygsätt innehållet: *</label>
                     <div class="rating-stars">
                         <input type="radio" name="star" id="star5" value="5"><label for="star5">★</label>
                         <input type="radio" name="star" id="star4" value="4"><label for="star4">★</label>
@@ -248,62 +87,25 @@
                         <input type="radio" name="star" id="star1" value="1"><label for="star1">★</label>
                     </div>
                 </div>
-
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="subject" style="font-weight: 600; font-size: 0.95rem;">Ämne: *</label>
-                    <select id="subject" required>
-                        <option value="" disabled selected>Välj ämne...</option>
-                        <option value="förslag">Jag har ett förslag / idé</option>
-                        <option value="fel">Jag vill rapportera ett fel</option>
-                        <option value="beröm">Jag vill bara tacka!</option>
-                    </select>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="user-name" style="font-weight: 600; font-size: 0.95rem;">Ditt namn (frivilligt):</label>
-                    <input type="text" id="user-name" placeholder="Skriv ditt namn här...">
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="user-message" style="font-weight: 600; font-size: 0.95rem;">Ditt meddelande: *</label>
-                    <textarea id="user-message" rows="5" placeholder="Skriv dina tankar här..." required style="resize: vertical;"></textarea>
-                </div>
-                
-                <button type="submit" style="display: inline-block; background-color: var(--primary-color); color: white; border: none; padding: 14px 30px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; align-self: flex-start; box-shadow: 0 4px 6px rgba(224, 108, 117, 0.2);">Skicka in ✉️</button>
+                <textarea rows="4" placeholder="Skriv din feedback här..." required style="padding:12px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color);"></textarea>
+                <button type="submit" style="align-self:flex-start; background:var(--primary-color); color:white; border:none; padding:12px 25px; border-radius:10px; cursor:pointer;">Skicka</button>
             </form>
-            
-            <div id="form-feedback" style="display: none; margin-top: 15px; padding: 15px; background-color: rgba(104, 211, 145, 0.2); border: 1px solid #68d391; color: #2f855a; border-radius: 8px; font-weight: 600; text-align: center;">
-                Tack! Ditt förslag och betyg har skickats. 🎉
-            </div>
+            <div id="form-feedback" style="display:none; margin-top:15px; color:#2f855a; text-align:center;">Tack! Vi har tagit emot ditt svar.</div>
         </div>
-
     </div>
 
     <script>
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const targetTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', targetTheme);
             localStorage.setItem('theme', targetTheme);
         }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
 
         document.getElementById('suggestion-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const hasStar = document.querySelector('input[name="star"]:checked');
-            if(!hasStar){
-                alert("Vänligen ge ett betyg med stjärnorna också!");
-                return;
-            }
             document.getElementById('suggestion-form').style.display = 'none';
             document.getElementById('form-feedback').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('suggestion-form').reset();
-                document.getElementById('suggestion-form').style.display = 'flex';
-                document.getElementById('form-feedback').style.display = 'none';
-            }, 3000);
         });
     </script>
 </body>

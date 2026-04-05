@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Begreppslista v.15 - Fullständig</title>
+    <title>Begreppslista v.15 - Premium med Ljud</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -87,7 +87,10 @@
         <h1 style="text-align:center; color:var(--primary-color);">Begreppslista vecka 15</h1>
         
         <div id="study-section" class="box">
-            <h2 class="section-title">📖 Studera begrepp (19 st)</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); margin-bottom: 20px; padding-bottom: 10px;">
+                <h2 style="margin: 0; font-size: 1.5rem;">📖 Studera begrepp (19 st)</h2>
+                <span style="font-size: 0.9rem; color: #718096;">Klicka på 🔊 för att lyssna</span>
+            </div>
             <div id="terms-list"></div>
             <div style="text-align: center; margin-top: 20px;">
                 <button class="btn" onclick="startFlashcards()">Öva med Flashcards 🗂️</button>
@@ -97,7 +100,7 @@
 
         <div id="flashcard-section" class="box" style="display:none;">
             <h2 class="section-title">🗂️ Flashcards (Leitner System)</h2>
-            <p style="text-align:center; color:#718096;">Klicka på kortet för att vända. Markera om du kunde det eller inte.</p>
+            <p style="text-align:center; color:#718096;">Klicka på kortet för att vända. Begreppet läses upp automatiskt! 🔊</p>
             <div class="flashcard-area">
                 <div class="flashcard">
                     <div class="flashcard-inner">
@@ -115,8 +118,11 @@
                     <button class="btn" style="background-color:#e06c75;" onclick="markCard(false)">Kunde inte ❌</button>
                     <button class="btn" style="background-color:#48bb78;" onclick="markCard(true)">Kunde det! ✔️</button>
                 </div>
-                <span id="card-counter" style="font-weight: 600;">1 / 19</span>
-                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Avbryt och till listان</button>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span id="card-counter" style="font-weight: 600;">1 / 19</span>
+                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="speakCurrentTerm()">Lyssna igen 🔊</button>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 0.9rem;" onclick="showStudy()">Avbryt och till listan</button>
             </div>
         </div>
 
@@ -154,10 +160,9 @@
     </div>
 
     <script>
-        // دیتابیس ۱۹ تایی بر اساس فایل ورد شما
         const termsData = [
             { term: "Demokratisk värdegrund", sv: "Alla människor har lika värde, rätt att bli respekterade och rätt att vara delaktiga i samhället." },
-            { term: "Lika värde", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
+            { term: "Lika värده", sv: "Alla människor är olika och har unika förmågor. Det som är olika berikar och behövs för att utveckling ska ske." },
             { term: "Likvärdighet", sv: "Något ska vara lika bra för alla. Alla ska ha rätt till samma vård." },
             { term: "Inkludering", sv: "Alla människor får vara med och känna sig delaktiga, oavsett funktionsnedsättning, ålder eller bakgrund." },
             { term: "Tillgänglighet", sv: "Innebär att alla miljöer i samhället ska vara förberedda på att alla är olika och har olika behov. Alla ska känna sig välkomna och vara en del i sammanhanget." },
@@ -170,9 +175,9 @@
             { term: "Funktionsförmåga", sv: "Beskriver hur en person fungerar fysiskt, psykiskt, kognitivt och socialt." },
             { term: "Fysisk funktionsförmåga", sv: "Nedsatt rörelseförmåga, nedsatt syn, nedsatt hörsel. Man kan födas med det eller få det senare i livet." },
             { term: "Psykisk funktionsförmåga", sv: "Trauma, sexuellt övergrepp, krig, livssituation." },
-            { term: "Kognitiv funktionsförmåga", sv: "Svårt med inlärning, minne, svårt att ta in information eller förmedla information, bli störd av olika ljud." },
+            { term: "Kognitiv funktionsförmåga", sv: "Svårt med inlärning, minنه، svårt att ta in information eller förmedla information, bli störd av olika ljud." },
             { term: "Social funktionsförmåga", sv: "Svårigheter med att skapa och bibehålla relationer." },
-            { term: "Funktionsnedsättning", sv: "Betyder att en funktion är nedsatt och fungerar på ett annorunda sätt eller inte alls." },
+            { term: "Funktionsnedsättning", sv: "Betyder att en funktion är nedsatt och fungerar på ett annorlunda sätt eller inte alls." },
             { term: "Funktionshinder", sv: "Uppstår när omgivningen gör det svårt för en person med funktionsnedsättning att vara delaktig på lika villkor." },
             { term: "Självbestämmande", sv: "Betyder att en person får vara med och bestämma över sitt eget liv." }
         ];
@@ -187,6 +192,17 @@
         let timerInterval;
         let timeLeft = 15;
 
+        // تابع خواندن متن با لهجه سوئدی
+        function speakSwedish(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'sv-SE';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
         window.onload = function() { populateTermsList(); }
 
         function populateTermsList() {
@@ -196,7 +212,13 @@
                 const row = document.createElement('div');
                 row.style.padding = '10px';
                 row.style.borderBottom = '1px solid var(--border-color)';
-                row.innerHTML = `<b style="color:var(--primary-color);">${item.term}</b> - ${item.sv}`;
+                row.style.display = 'flex';
+                row.style.justifyContent = 'space-between';
+                row.style.alignItems = 'center';
+                row.innerHTML = `
+                    <span><b style="color:var(--primary-color);">${item.term}</b> - ${item.sv}</span>
+                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="speakSwedish('${item.term.replace(/'/g, "\\'")}')">🔊</button>
+                `;
                 listDiv.appendChild(row);
             });
         }
@@ -215,10 +237,18 @@
         function updateFlashcard() {
             document.querySelector('.flashcard').classList.remove('flipped');
             setTimeout(() => {
-                document.getElementById('card-front-text').innerText = activeCards[currentCardIndex].term;
+                const currentTerm = activeCards[currentCardIndex].term;
+                document.getElementById('card-front-text').innerText = currentTerm;
                 document.getElementById('card-back-swedish').innerText = activeCards[currentCardIndex].sv;
                 document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${activeCards.length} (Kvar: ${activeCards.length + failedCards.length})`;
+                
+                // خواندن خودکار عنوان کارت
+                speakSwedish(currentTerm);
             }, 150);
+        }
+
+        function speakCurrentTerm() {
+            speakSwedish(activeCards[currentCardIndex].term);
         }
 
         function flipCard() { document.querySelector('.flashcard').classList.toggle('flipped'); }
@@ -252,7 +282,6 @@
             document.getElementById('study-section').style.display = 'none'; 
             document.getElementById('quiz-section').style.display = 'block'; 
             currentQuizIndex = 0; score = 0; 
-            // در اینجا تمام ۱۹ سوال لود می‌شوند
             quizQuestions = [...termsData].sort(() => Math.random() - 0.5); 
             document.getElementById('current-score').innerText = score;
             generateQuizQuestion(); 
@@ -302,7 +331,7 @@
                 selectedBtn.classList.add('correct'); 
                 score++; 
                 document.getElementById('current-score').innerText = score;
-                new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==').play(); // صدای کوتاه درست بودن
+                new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==').play();
             } else { 
                 if (selectedBtn) selectedBtn.classList.add('wrong'); 
                 buttons.forEach(btn => { if (btn.innerText === quizQuestions[currentQuizIndex].sv) btn.classList.add('correct'); }); 

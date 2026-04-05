@@ -16,7 +16,6 @@
             --font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
         }
 
-        /* استایل‌های دارک مود */
         [data-theme="dark"] {
             --bg-color: #1a202c;
             --text-color: #f7fafc;
@@ -34,7 +33,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* منوی بالای صفحه */
         nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); color: #ffffff; }
         nav .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; }
         .nav-links { display: flex; height: 100%; align-items: center; }
@@ -81,7 +79,6 @@
         
         @media (max-width: 600px) { .grid-item { flex: 1 1 100%; } }
 
-        /* استایل‌های بخش تمرین */
         .exercise-box { padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid; }
         .exercise-orange { background-color: rgba(246, 173, 85, 0.1); border-color: #f6ad55; }
         .exercise-green { background-color: rgba(104, 211, 145, 0.1); border-color: #68d391; }
@@ -90,7 +87,6 @@
         summary { cursor: pointer; font-weight: 700; color: var(--primary-color); outline: none; margin-top: 10px; }
         .answer-content { background: var(--bg-color); padding: 15px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
 
-        /* 🔥 استایل‌های بخش ستاره و فرم جدید 🔥 */
         .rating-stars {
             display: flex;
             flex-direction: row-reverse;
@@ -176,11 +172,11 @@
             <p>För att en person ska känna sig delaktig är följande sex områden avgörande:</p>
             <ul>
                 <li><strong>Tillgänglighet:</strong> Att kunna vara på plats fysiskt och känna samhörighet.</li>
-                <li><strong>Tillhörighet:</strong> Känna sig inkluderad och trygg.</li>
-                <li><strong>Engagemang:</strong> Att känna intresse och vilja (kan aldrig tvingas).</li>
-                <li><strong>Samhandling:</strong> Vara delaktig i det som rör en själv.</li>
+                <li><strong>Tillhörighet:</strong> Att känna sig inkluderad och trygg.</li>
+                <li><strong>Engagemang:</strong> Att känna intresse och vilja.</li>
+                <li><strong>Samhandling:</strong> Att få vara delaktig i det som rör en själv.</li>
                 <li><strong>Autonomi:</strong> Rätten till självbestämmande.</li>
-                <li><strong>Erkännande:</strong> Bli accepterad och lyssnad på.</li>
+                <li><strong>Erkännande:</strong> Att bli accepterad och lyssnad på.</li>
             </ul>
 
             <h2>Funktionsförmåga vs Funktionsnedsättning</h2>
@@ -229,7 +225,7 @@
                             <li><strong>Engagemang:</strong> Intresse, lust och vilja.</li>
                             <li><strong>Samhandling:</strong> Vara delaktig i områden som rör personen själv.</li>
                             <li><strong>Autonomi:</strong> Rätten till självbestämmande.</li>
-                            <li><strong>Erkännande:</strong> Bli accepterad och lyssnad på.</li>
+                            <li><strong>Erkännande:</strong> Bli accepterad och lyssnاد på.</li>
                         </ol>
                     </div>
                 </details>
@@ -284,7 +280,6 @@
     </div>
 
     <script>
-        // اسکریپت دارک مود
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -295,21 +290,15 @@
             document.documentElement.setAttribute('data-theme', 'dark');
         }
 
-        // اسکریپت فرم ارسال نظر
         document.getElementById('suggestion-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // چک کردن اینکه آیا ستاره ای انتخاب شده است یا خیر
             const hasStar = document.querySelector('input[name="star"]:checked');
             if(!hasStar){
                 alert("Vänligen ge ett betyg med stjärnorna också!");
                 return;
             }
-            
             document.getElementById('suggestion-form').style.display = 'none';
             document.getElementById('form-feedback').style.display = 'block';
-            
-            // بازگرداندن فرم به حالت اول پس از ۳ ثانیه
             setTimeout(() => {
                 document.getElementById('suggestion-form').reset();
                 document.getElementById('suggestion-form').style.display = 'flex';

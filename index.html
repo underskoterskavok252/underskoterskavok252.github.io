@@ -13,7 +13,7 @@
             --border-color: #e2e8f0;
             --nav-bg: #2d3748;
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            --font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         [data-theme="dark"] {
@@ -50,18 +50,19 @@
         .subtitle { color: #718096; font-size: 1.1rem; margin-bottom: 30px; }
 
         .clock-box { background-color: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); margin-bottom: 30px; }
-        .card { background-color: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+        .card { background-color: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); margin-bottom: 25px; }
         
         .menu-title { font-size: 1.5rem; margin-top: 0; margin-bottom: 20px; color: var(--text-color); display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn { display: inline-block; background-color: var(--primary-color); color: white; text-decoration: none; padding: 14px 30px; border-radius: 10px; font-weight: 700; font-size: 1.1rem; transition: background 0.2s; box-shadow: 0 4px 6px rgba(224, 108, 117, 0.2); }
+        .btn { display: inline-block; background-color: var(--primary-color); color: white; text-decoration: none; padding: 12px 25px; border-radius: 10px; font-weight: 700; font-size: 1rem; transition: background 0.2s; box-shadow: 0 4px 6px rgba(224, 108, 117, 0.2); border: none; cursor: pointer; }
         .btn:hover { background-color: #be5059; }
 
-        /* استایل ستاره ها */
         .rating-stars input:checked ~ label,
         .rating-stars label:hover,
-        .rating-stars label:hover ~ label {
-            color: #f6ad55 !important;
-        }
+        .rating-stars label:hover ~ label { color: #f6ad55 !important; }
+
+        .stats-grid { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
+        .stat-card { background: rgba(0,0,0,0.02); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); flex: 1; }
+        [data-theme="dark"] .stat-card { background: rgba(255,255,255,0.02); }
     </style>
 </head>
 <body>
@@ -78,26 +79,38 @@
     </nav>
 
     <div class="container">
-        <h1 class="title">Begreppslista vecka 15</h1>
+        <h1 class="title">Välkommen till Studieportalen</h1>
         <p class="subtitle">Öva på viktiga begrepp, använd flashcards och gör quiz.</p>
 
         <div class="clock-box">
             <h2 id="live-date" style="color: #e06c75; margin: 0 0 5px 0; font-size: 1.4rem;">Laddar datum...</h2>
-            <h1 id="live-time" style="color: #2d3748; font-size: 3.2rem; margin: 0; font-weight: 800;">00:00:00</h1>
+            <h1 id="live-time" style="color: var(--text-color); font-size: 3.2rem; margin: 0; font-weight: 800;">00:00:00</h1>
         </div>
 
         <div class="card">
-            <h2 class="menu-title">📚 Studera Nu</h2>
-            <p style="color: #718096; margin-bottom: 30px;">Klicka på knappen nedan för att öppna ordlistan och börja plugga.</p>
-            <a href="Begreppslista-v15.html" class="btn">Öppna Begreppslista ➡️</a>
+            <h2 class="menu-title">📊 Din Statistik</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 style="margin:0; color:var(--primary-color);" id="high-score">0 / 10</h3>
+                    <p style="margin:5px 0 0 0; font-size:0.85rem;">Bästa Quiz Score</p>
+                </div>
+                <div class="stat-card">
+                    <h3 style="margin:0; color:var(--primary-color);" id="cards-learned">0</h3>
+                    <p style="margin:5px 0 0 0; font-size:0.85rem;">Lärda Flashcards</p>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center; gap: 10px;">
+                <a href="Begreppslista-v15.html" class="btn">Öppna Begreppslista ➡️</a>
+                <button class="btn" style="background-color:#4a5568;" onclick="sharePage()">Dela Sidan 🔗</button>
+            </div>
         </div>
 
-        <div class="card" style="margin-top: 30px; text-align: left;">
+        <div class="card" style="text-align: left;">
             <h2 class="menu-title" style="justify-content: flex-start;">Tyck till och ge förslag! 💬</h2>
             <p style="color: #718096; margin-bottom: 20px;">Betygsätt startsidan och skicka dina tankar eller förslag till oss.</p>
             
             <form id="home-suggestion-form" style="display: flex; flex-direction: column; gap: 15px;">
-                <div style="display: flex; flex-direction: column;">
+                <div>
                     <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Hur användbar var denna startsida? *</label>
                     <div class="rating-stars" style="display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; margin: 5px 0 15px 0;">
                         <input type="radio" name="star-home" id="hstar5" value="5" style="display:none;"><label for="hstar5" style="font-size: 2rem; color: #cbd5e1; cursor: pointer;">★</label>
@@ -109,8 +122,8 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="home-subject" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ämne: *</label>
-                    <select id="home-subject" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-family: inherit;">
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ämne: *</label>
+                    <select id="home-subject" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color);">
                         <option value="" disabled selected>Välj ämne...</option>
                         <option value="förslag">Jag har ett förslag / idé</option>
                         <option value="fel">Jag vill rapportera ett fel</option>
@@ -119,16 +132,16 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="home-user-name" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt namn (frivilligt):</label>
-                    <input type="text" id="home-user-name" placeholder="Skriv ditt namn här..." style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-family: inherit;">
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt namn (frivilligt):</label>
+                    <input type="text" id="home-user-name" placeholder="Skriv ditt namn här..." style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color);">
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <label for="home-user-message" style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt meddelande: *</label>
-                    <textarea id="home-user-message" rows="4" placeholder="Skriv dina tankar här..." required style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-family: inherit; resize: vertical;"></textarea>
+                    <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-color);">Ditt meddelande: *</label>
+                    <textarea id="home-user-message" rows="4" placeholder="Skriv dina tankar här..." required style="padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); resize: vertical;"></textarea>
                 </div>
                 
-                <button type="submit" class="btn" style="align-self: flex-start; border: none; cursor: pointer;">Skicka in ✉️</button>
+                <button type="submit" class="btn" style="align-self: flex-start;">Skicka in ✉️</button>
             </form>
             
             <div id="home-form-feedback" style="display: none; margin-top: 15px; padding: 15px; background-color: rgba(104, 211, 145, 0.2); border: 1px solid #68d391; color: #2f855a; border-radius: 8px; font-weight: 600; text-align: center;">
@@ -148,33 +161,35 @@
             const monthName = months[now.getMonth()];
             const year = now.getFullYear();
             
-            const fullDateStr = dayName.charAt(0).toUpperCase() + dayName.slice(1) + " " + day + " " + monthName + " " + year;
-            
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const fullTimeStr = hours + ":" + minutes + ":" + seconds;
-
-            document.getElementById('live-date').innerText = fullDateStr;
-            document.getElementById('live-time').innerText = fullTimeStr;
+            document.getElementById('live-date').innerText = dayName.charAt(0).toUpperCase() + dayName.slice(1) + " " + day + " " + monthName + " " + year;
+            document.getElementById('live-time').innerText = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0') + ":" + String(now.getSeconds()).padStart(2, '0');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const targetTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', targetTheme);
             localStorage.setItem('theme', targetTheme);
         }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+
+        // بارگذاری آمار
+        document.getElementById('high-score').innerText = (localStorage.getItem('quizHighScore') || 0) + " / 10";
+        document.getElementById('cards-learned').innerText = localStorage.getItem('cardsLearnedCount') || 0;
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({ title: 'Studieportal', url: window.location.href });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Länk kopierad till urklipp!");
+            }
         }
 
         document.getElementById('home-suggestion-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const hasStar = document.querySelector('input[name="star-home"]:checked');
-            if(!hasStar){
+            if(!document.querySelector('input[name="star-home"]:checked')){
                 alert("Vänligen ge ett betyg med stjärnorna också!");
                 return;
             }

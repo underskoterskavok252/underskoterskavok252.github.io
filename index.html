@@ -3,102 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studieportal - Hem</title>
+    <title>Studieportal - Startsida</title>
     <style>
         :root {
-            --bg-color: #f0f4f8;
-            --text-color: #2d3748;
-            --primary-color: #e06c75;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --nav-bg: #2d3748;
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --font-family: 'Segoe UI', Roboto, sans-serif;
+            --bg-color: #f0f4f8; --text-color: #2d3748; --primary-color: #e06c75;
+            --card-bg: #ffffff; --border-color: #e2e8f0; --nav-bg: #2d3748;
         }
-
-        [data-theme="dark"] {
-            --bg-color: #1a202c;
-            --text-color: #f7fafc;
-            --card-bg: #2d3748;
-            --border-color: #4a5568;
-            --nav-bg: #11141a;
-        }
-
         body {
-            font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color);
-            margin: 0; padding: 0; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); color: var(--text-color);
+            margin: 0; display: flex; flex-direction: column; min-height: 100vh;
         }
-        nav { background-color: var(--nav-bg); box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; }
-        nav .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; }
-        .nav-links { display: flex; height: 100%; align-items: center; }
-        nav a { color: #a0aec0; text-decoration: none; font-weight: 600; padding: 0 15px; height: 100%; display: flex; align-items: center; font-size: 0.95rem; }
-        nav a:hover, nav a.active { color: #ffffff; }
-        nav a.active { border-bottom: 4px solid var(--primary-color); background-color: rgba(255,255,255,0.05); }
-
-        .nav-right { display: flex; align-items: center; gap: 15px; }
-        .user-name { color: #a0aec0; font-size: 0.9rem; font-weight: 600; }
-
-        .dark-mode-btn {
-            background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;
-        }
-
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px 50px 20px; flex: 1; }
-        .box { background-color: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); text-align: center; box-shadow: var(--shadow-md); }
+        nav { background-color: var(--nav-bg); padding: 15px 20px; color: white; display: flex; justify-content: space-between; }
+        nav a { color: #a0aec0; text-decoration: none; font-weight: bold; margin-right: 15px; }
+        nav a:hover, nav a.active { color: white; }
         
-        h1 { color: var(--primary-color); margin-bottom: 10px; font-size: 2.5rem; }
-        p { font-size: 1.2rem; color: var(--text-color); margin-bottom: 30px; }
-
-        .btn { background-color: var(--primary-color); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 1.1rem; display: inline-block; transition: background 0.2s; }
-        .btn:hover { background-color: #d05b65; }
-
-        footer {
-            background-color: var(--nav-bg);
-            color: #a0aec0;
-            text-align: center;
-            padding: 15px 20px;
-            font-size: 0.9rem;
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        .hero { text-align: center; padding: 50px 20px; background: white; border-bottom: 1px solid var(--border-color); }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; flex: 1; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { 
+            background: white; padding: 25px; border-radius: 15px; text-align: center; 
+            border: 1px solid var(--border-color); transition: 0.3s; text-decoration: none; color: inherit;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); border-color: var(--primary-color); }
+        .card h3 { color: var(--primary-color); margin-top: 10px; }
+        footer { background: var(--nav-bg); color: #a0aec0; text-align: center; padding: 20px; margin-top: 40px; }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="index.html" class="active">🏠 Hem</a>
-                <a href="Begreppslista-v15.html">📖 Begrepp v.15</a>
-                <a href="Helhetsperspektiv.html">🎯 Helhetsperspektiv</a>
-            </div>
-            <div class="nav-right">
-                <span class="user-name">👤 underskoterskavok252</span>
-                <button class="dark-mode-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container">
-        <div class="box">
-            <h1>Välkommen underskoterskavok252!</h1>
-            <p>Välj ett område i menyn ovan eller klicka på knappen nedan för att börja öva på begreppen inför vecka 15!</p>
-            <a href="Begreppslista-v15.html" class="btn">Gå till Begreppslista 🚀</a>
-        </div>
+<nav>
+    <div class="nav-links">
+        <a href="index.html" class="active">🏠 Hem</a>
+        <a href="Begreppslista-v15.html">📖 Begrepp v.15</a>
+        <a href="Helhetsperspektiv.html">🎯 Helhetsperspektiv</a>
+        <a href="shop.html">🛒 VO-Shop</a>
     </div>
+</nav>
 
-    <footer>
-        © 2026 - Mohsen Naderi
-    </footer>
+<div class="hero">
+    <h1>Välkommen till Studieportalen ✨</h1>
+    <p>Din personliga plattform för Vård och Omsorg studier.</p>
+</div>
 
-    <script>
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', targetTheme);
-            localStorage.setItem('theme', targetTheme);
-        }
-        if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    </script>
+<div class="container">
+    <div class="grid">
+        <a href="Begreppslista-v15.html" class="card">
+            <span style="font-size: 3rem;">📖</span>
+            <h3>Begreppslista</h3>
+            <p>Träna på veckans begrepp med flashcards och quiz.</p>
+        </a>
+
+        <a href="Helhetsperspektiv.html" class="card">
+            <span style="font-size: 3rem;">🎯</span>
+            <h3>Helhetsperspektiv</h3>
+            <p>Läs om värdegrund, delaktighet och historik.</p>
+        </a>
+
+        <a href="shop.html" class="card">
+            <span style="font-size: 3rem;">🛒</span>
+            <h3>VO-Shop</h3>
+            <p>Hitta rätt kurslitteratur och verktyg för studierna.</p>
+        </a>
+    </div>
+</div>
+
+<footer>
+    © 2026 - Studieportal för underskoterskavok252
+</footer>
+
 </body>
 </html>

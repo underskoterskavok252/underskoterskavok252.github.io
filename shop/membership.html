@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VO-Akademin | Medlemskap</title>
+    <style>
+        :root { --primary: #2b6cb0; --accent: #f56565; --bg: #f7fafc; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; text-align: center; }
+        .nav { background: #2d3748; padding: 15px; text-align: left; }
+        .nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .hero { background: var(--primary); color: white; padding: 60px 20px; }
+        .card { 
+            background: white; max-width: 450px; margin: -40px auto 40px; 
+            padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            border: 1px solid #e2e8f0;
+        }
+        .card h2 { color: var(--primary); margin-top: 0; }
+        input[type="email"] { 
+            width: 100%; padding: 15px; margin-bottom: 15px; 
+            border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .btn { 
+            background: var(--accent); color: white; border: none; padding: 15px; 
+            width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #e53e3e; transform: translateY(-2px); }
+        .success-msg { display: none; color: #2f855a; background: #f0fff4; padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <a href="index.html">⬅️ Tillbaka till hem</a>
+</div>
+
+<div class="hero">
+    <h1>Välkommen till VO-Akademin 🎓</h1>
+    <p>Få veckans viktigaste begrepp och PDF-guider direkt i mejlen.</p>
+</div>
+
+<div class="card">
+    <h2>Gratis Studieguide PDF</h2>
+    <p>Ange din e-post för att få vår kompletta guide för Termin 1 direkt till din inkorg.</p>
+    
+    <form action="https://formspree.io/f/xykbopyy" method="POST" id="my-form">
+        <input type="email" name="email" placeholder="Din e-postadress..." required>
+        <button type="submit" class="btn" id="submit-btn">JA, SKICKA GUIDEN! 📩</button>
+    </form>
+    
+    <div id="status" class="success-msg">
+        Tack! Vi har tagit emot din förfrågan. Guiden skickas inom kort. ✅
+    </div>
+</div>
+
+<script>
+    var form = document.getElementById("my-form");
+    var status = document.getElementById("status");
+    var btn = document.getElementById("submit-btn");
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      btn.innerText = "Skickar...";
+      btn.disabled = true;
+
+      var data = new FormData(event.target);
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          status.style.display = "block";
+          form.style.display = "none";
+        } else {
+          btn.innerText = "Försök igen";
+          btn.disabled = false;
+          alert("Hoppsan! Något gick fel. Kontrollera anslutningen.");
+        }
+      }).catch(error => {
+        alert("Ett fel uppstod. Försök senare.");
+      });
+    }
+    form.addEventListener("submit", handleSubmit)
+</script>
+
+</body>
+</html>

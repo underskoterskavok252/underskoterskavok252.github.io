@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VO-Guiden | Din expert på vårdlitteratur Gy25</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a365d;
+            --primary-color: #2b6cb0;
+            --accent-color: #ed64a6;
+            --bg-soft: #f4f7f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            background-color: var(--bg-soft);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary-color); text-decoration: none; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+
+        /* Main Container */
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 20px 20px 60px; }
+
+        .back-btn-container {
+            margin-bottom: 20px;
+        }
+
+        .expert-notice {
+            background: #eef2ff;
+            border-left: 6px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Product Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+
+        .card-img-container {
+            background: #fff;
+            padding: 30px;
+            text-align: center;
+            height: 250px;
+        }
+
+        .card-img-container img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .card-content { padding: 25px; flex-grow: 1; }
+        
+        .badge {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .price-btn {
+            display: block;
+            background: var(--primary-color);
+            color: white !important;
+            text-align: center;
+            padding: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .price-btn:hover { background: var(--primary-dark); }
+
+        /* Form */
+        .contact-section {
+            margin-top: 60px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e0;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        footer { background: var(--primary-dark); color: white; padding: 50px 20px; text-align: center; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo">VO-GUIDEN <span style="color: var(--accent-color);">.</span></a>
+    <div class="menu">
+        <a href="/Begreppslista/Begreppslista-v15.html" style="text-decoration: none; font-weight: bold; color: var(--primary-color);">
+            <i class="fas fa-book-reader"></i> Plugghjälp
+        </a>
+    </div>
+</nav>
+
+<header>
+    <h1>Hitta rätt kurslitteratur för Gy25</h1>
+    <p>Vi jämför priser och hjälper dig att välja rätt böcker för Vård och Omsorg</p>
+</header>
+
+<div class="wrapper">
+    <div class="back-btn-container">
+        <a href="/" style="background-color: #4a5568; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;">
+            <i class="fas fa-arrow-left"></i> Tillbaka till Start
+        </a>
+    </div>
+
+    <div class="expert-notice">
+        <i class="fas fa-user-md fa-3x" style="color: var(--primary-color);"></i>
+        <div>
+            <strong>Varför lita på oss?</strong>
+            <p style="margin: 5px 0 0; font-size: 0.9rem;">Vi är specialiserade på det nya vårdprogrammet Gy25. Alla böcker på denna sida är verifierade kurskrav.</p>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-img-container">
+                <img src="medicin_bas.png" alt="Medicin Bas">
+            </div>
+            <div class="card-content">
+                <span class="badge">Nivå 1</span>
+                <h3>Medicin Bas</h3>
+                <p style="font-size: 0.9rem; color: #718096; margin-top: 15px; font-style: italic;">"En grundläggande bok för dig som vill förstå kroppens anatomi och fysiologi på ett pedagogiskt sätt."</p>
+                <a href="https://www.bokus.com" class="price-btn"><i class="fas fa-shopping-cart"></i> Se lägsta pris</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img-container">
+                <img src="social_omsorg.png" alt="Social omsorg">
+            </div>
+            <div class="card-content">
+                <span class="badge">Nivå 1 & 2</span>
+                <h3>Social omsorg 1 & 2</h3>
+                <p style="font-size: 0.9rem; color: #718096; margin-top: 15px; font-style: italic;">"Täcker allt från etik till praktiskt arbete inom socialtjänsten. Ett måste för VO-programmet."</p>
+                <a href="https://www.bokus.com" class="price-btn"><i class="fas fa-shopping-cart"></i> Se lägsta pris</a>
+            </div>
+        </div>
+    </div>
+
+    <section style="margin-top: 60px; background: white; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0;">
+        <h2 style="text-align: center; color: var(--primary-dark); margin-bottom: 30px;">Vanliga frågor om Gy25-litteratur</h2>
+        <div style="margin-bottom: 20px; border-bottom: 1px solid #edf2f7; padding-bottom: 15px;">
+            <strong style="display: block; color: var(--primary-color); font-size: 1.1rem;">Behöver jag köpa alla böcker direkt?</strong>
+            <p style="margin-top: 5px; color: #4a5568;">Vi rekommenderar att du börjar med Medicin Bas och Social Omsorg, då dessa är centrala i termin 1.</p>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <strong style="display: block; color: var(--primary-color); font-size: 1.1rem;">Vad är skillnaden på Gy25 och gamla böcker?</strong>
+            <p style="margin-top: 5px; color: #4a5568;">Gy25 följer den nya läroplanen med nivåindelning som krävs från och med 2025.</p>
+        </div>
+    </section>
+
+    <div class="contact-section">
+        <h3 style="text-align: center; color: var(--primary-dark); margin-bottom: 25px;">Har du frågor om litteratur?</h3>
+        <form action="https://formspree.io/f/xdapjzeg" method="POST" style="max-width: 500px; margin: 0 auto;">
+            <input type="text" name="name" placeholder="Ditt namn" required>
+            <input type="email" name="_replyto" placeholder="Din e-post" required>
+            <textarea name="message" rows="4" placeholder="Skriv ditt meddelande här..." required></textarea>
+            <button type="submit" style="width: 100%; background: var(--accent-color); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">Skicka meddelande</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p><strong>VO-Guiden Sverige</strong></p>
+    <p style="opacity: 0.7; font-size: 0.8rem; line-height: 1.5;">
+        Denna sida innehåller annonslänkar för att stödja driften av studieportalen.<br>
+        © 2026 VO-Guiden | Kontakt: <a href="mailto:info@voguiden.se" style="color: white;">info@voguiden.se</a>
+    </p>
+</footer>
+
+</body>
+</html>
